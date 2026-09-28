@@ -8,3 +8,7 @@
 
 /* Display the official college lockup without altering its artwork or colors. */
 .qm-brand{flex-shrink:0;padding:0 20px 0 7px}.drawer-toggle{flex-shrink:0}.college-logo{position:relative;display:block;flex-shrink:0;width:252px;height:58px;overflow:hidden;background:#fff;border-radius:2px}.college-logo img{position:absolute;display:block;max-width:none;width:450px;height:auto;left:-107px;top:-93px}@media(max-width:760px){.qm-brand{padding-right:13px}.college-logo{width:225px;height:54px}.college-logo img{width:400px;left:-94px;top:-81px}}@media(max-width:600px){.qm-primary-nav{display:none}}
+
+/* Large question banks can be practised one chapter at a time. */
+.test-toolbar{flex-wrap:wrap;gap:14px}.test-toolbar .chapter-filter{flex:1 1 300px;min-width:0}.chapter-filter select{width:100%;min-width:0}.test-toolbar select{max-width:100%}.question-topic{font-size:13px;color:#61718a;line-height:1.7;margin:-10px 0 18px}.question-prompt{font-size:18px}.question-nav{scrollbar-width:thin;scrollbar-color:#aebbd0 transparent}.question-dot{flex-shrink:0}.prose h2,.prose h3,.prose h4,.prose h5,.prose h6{scroll-margin-top:85px}@media(max-width:760px){.test-toolbar .chapter-filter{flex-basis:100%}.question-prompt{font-size:17px}.test-toolbar .chapter-filter label{display:block}.test-toolbar .chapter-filter select{font-size:13px}}
+.chapter-filter label{flex-shrink:0;white-space:nowrap}.chapter-filter select{flex:1;width:0}

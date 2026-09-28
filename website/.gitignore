@@ -2,3 +2,4 @@ node_modules/
 dist/
 .sites-runtime/
 .openai/
+.DS_Store

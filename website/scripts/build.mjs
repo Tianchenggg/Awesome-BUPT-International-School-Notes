@@ -40,7 +40,13 @@ async function html(md,course,quiz=false){
  const stash=(tex,display)=>{const token=`<span data-bupt-math="${replacements.length}"></span>`;replacements.push(renderMath(tex,display));return token};
  md=md.replace(/(^|\n)([ \t]*)```math\s*\n([\s\S]*?)\n\2```/g,(_,lead,indent,tex)=>lead+indent+stash(tex.trim(),true));
  md=md.replace(/\$`([^`]+)`\$/g,(_,tex)=>stash(tex,false));
- if(quiz){md=md.replace(/\$\$([\s\S]+?)\$\$/g,(_,tex)=>stash(tex,true)).replace(/(?<!\$)\$([^\n$]+)\$(?!\$)/g,(_,tex)=>stash(tex,false));}
+ if(quiz){
+  // Literal code and escaped currency must never enter the formula parser.
+  const code=[];const protect=value=>{const key=`BUPTLITERALCODE${code.length}END`;code.push(value);return key};
+  md=md.replace(/(^|\n)([ \t]*)(`{3,}|~{3,})[^\n]*\n[\s\S]*?\n\2\3[ \t]*(?=\n|$)/g,protect).replace(/(`+)[^`]*?\1/g,protect);
+  md=md.replace(/(?<!\\)\$\$([\s\S]+?)(?<!\\)\$\$/g,(_,tex)=>stash(tex,true)).replace(/(?<![\\$])\$([^\n$]+?)(?<!\\)\$(?!\$)/g,(_,tex)=>stash(tex,false));
+  md=md.replace(/BUPTLITERALCODE(\d+)END/g,(_,i)=>code[+i]);
+ }
  // Resolve images using the Markdown parser (including nested parentheses in paths).
  const images=[];const localImages=new Map();
  const tokens=marked.lexer(md,{gfm:true});marked.walkTokens(tokens,t=>{if(t.type==='image')images.push(t)});
@@ -60,18 +66,19 @@ async function html(md,course,quiz=false){
 }
 function sections(text){
  const lines=text.split('\n');const count=lines.filter(s=>/^## /.test(s)).length;const splitLevel=count<4?3:2;
- const result=[];let current={title:'课程导读',body:[]};let fence=null;
- for(const line of lines){
+ const result=[];let current={title:'课程导读',body:[],startLine:1};let fence=null;
+ for(const [lineIndex,line] of lines.entries()){
   const f=line.match(/^\s*(`{3,}|~{3,})/);if(f){if(!fence)fence=f[1][0];else if(f[1][0]===fence)fence=null;}
   const heading=!fence&&line.match(/^(#{1,6}) (.+)/);
   if(heading&&heading[1].length===1)continue;
-  if(heading&&heading[1].length<=splitLevel){if(current.body.join('\n').trim())result.push(current);current={title:heading[2],body:[]};}
-  else current.body.push(line);
+  if(heading&&heading[1].length<=splitLevel){current.endLine=lineIndex;if(current.body.join('\n').trim())result.push(current);current={title:heading[2],body:[],startLine:lineIndex+1};}
+  else current.body.push(heading?`${heading[1]} <span id="source-line-${lineIndex+1}"></span>${heading[2]}`:line);
  }
- if(current.body.join('\n').trim())result.push(current);
+ current.endLine=lines.length;if(current.body.join('\n').trim())result.push(current);
  return result;
 }
-let questions=[];try{questions=JSON.parse(await fs.readFile(path.join(root,'content/questions.json'),'utf8'))}catch{}
+let questions=[];questions=JSON.parse(await fs.readFile(path.join(root,'content/questions.json'),'utf8'));
+const questionIds=new Set();
 const index=[];
 for(const [name,short,category,description] of metadata){
  const file=(await fs.readdir(path.join(source,name))).find(x=>x.endsWith('.md'));
@@ -81,9 +88,17 @@ for(const [name,short,category,description] of metadata){
  for(const [i,section] of chunks.entries())chapters.push({id:`section-${i+1}`,title:section.title,html:await html(section.body.join('\n'),name),minutes:Math.max(1,Math.round(section.body.join('\n').length/900))});
  const quiz=[];
  for(const [i,q] of questions.filter(q=>q.course===name).entries()){
-  const match=chunks.findIndex(s=>s.title===q.sourceHeading||s.body.some(l=>l.replace(/^#+\s*/,'').trim()===q.sourceHeading));
+  const match=q.sourceLine?chunks.findIndex(s=>q.sourceLine>=s.startLine&&q.sourceLine<=s.endLine):chunks.findIndex(s=>s.title===q.sourceHeading||s.body.some(l=>l.replace(/^#+\s*/,'').replace(/<span[^>]*><\/span>/g,'').trim()===q.sourceHeading));
   if(match<0)throw Error(`Question source missing: ${name} / ${q.sourceHeading}`);
-  quiz.push({id:`${id}-q${i+1}`,...q,promptHtml:await html(q.prompt,name,true),answerHtml:await html(q.answer,name,true),sectionId:chapters[match].id});
+  const questionId=q.id||`${id}-${crypto.createHash('sha256').update(q.prompt).digest('hex').slice(0,16)}`;
+  if(questionIds.has(questionId))throw Error(`Duplicate question ID: ${questionId}`);questionIds.add(questionId);
+  if(!q.prompt?.trim()||!q.answer?.trim())throw Error(`Empty question: ${questionId}`);
+  const sourceLines=raw.split('\n');
+  if(q.sourceLine&&(!Number.isInteger(q.sourceLine)||q.sourceLine<1||q.sourceEnd<q.sourceLine||q.sourceEnd>sourceLines.length))throw Error(`Invalid source range: ${questionId}`);
+  const sourceHeadingLine=q.sourceLine?sourceLines.slice(0,q.sourceLine).findLastIndex(l=>/^#{2,6} /.test(l))+1:0;
+  if(sourceHeadingLine&&sourceLines[sourceHeadingLine-1].replace(/^#+\s*/,'')!==q.sourceHeading)throw Error(`Outdated source heading: ${questionId}`);
+  const sourceAnchor=sourceHeadingLine>chunks[match].startLine?`source-line-${sourceHeadingLine}`:null;
+  quiz.push({...q,id:questionId,sourceAnchor,promptHtml:await html(q.prompt,name,true),answerHtml:await html(q.answer,name,true),sectionId:chapters[match].id});
  }
  const course={id,name,short,category,description,sourceFile:`${name}/${file}`,chapters,questions:quiz};
  await fs.writeFile(path.join(out,'data',id+'.json'),JSON.stringify(course));
