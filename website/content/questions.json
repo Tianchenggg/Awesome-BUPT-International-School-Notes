@@ -1,0 +1,1325 @@
+[
+  {
+    "course": "Cloud Computing",
+    "prompt": "Describe horizontal scaling and vertical scaling. What do scaling out, in, up and down mean?",
+    "answer": "**Horizontal scaling** adds or removes complete nodes: adding is **scaling out**, removing is **scaling in**. **Vertical scaling** adds or removes resources within one node: increasing is **scaling up**, reducing is **scaling down**.",
+    "sourceHeading": "Describe the concept of horizontal scaling and vertical scaling in cloud computing.",
+    "type": "concept"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "QMUL and BUPT want to share cloud resources for joint research projects. Which deployment model fits this scenario, and what are TWO main capital cost drivers?",
+    "answer": "Use a **Community Cloud**, shared by organizations with common objectives. Two capital cost drivers are **servers** and **networking**; buildings are another possible capital cost.",
+    "sourceHeading": "介绍这四种cloud deployment models",
+    "type": "application"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "How do eventually consistent and strongly consistent reads differ? Does strong consistency mean every physical replica updates instantaneously?",
+    "answer": "**Eventual consistency** may temporarily return stale data while replicas converge; an immediate read is not necessarily stale. A **strongly consistent read** reflects writes that successfully completed before the read. This is an observable read/write guarantee, not a claim that every physical replica updates instantaneously.",
+    "sourceHeading": "Eventually Consistent & Strongly Consistent",
+    "type": "concept"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "Describe envelope encryption. Must the key protecting the data key be asymmetric?",
+    "answer": "First encrypt the plaintext with a **data key**, usually a symmetric key. Then encrypt that data key with a **key-encryption key**. The protecting key can be symmetric or asymmetric; envelope encryption does not inherently require an asymmetric key pair.",
+    "sourceHeading": "Describe Envelope Encryption method.",
+    "type": "concept"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "A team wants resource-metric alarms and a record of AWS API activity. Which responsibilities belong to CloudWatch and which to CloudTrail?",
+    "answer": "**CloudWatch** collects resource/application metrics and logs, sets alarms, and reacts to resource changes. **CloudTrail** records and retains account activity, including API calls, for governance and operational/risk auditing.",
+    "sourceHeading": "Describe Amazon CloudWatch and AWS CloudTrail.",
+    "type": "application"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "A MapReduce job calculates average sale price per product. Why can averaging the local averages in a combiner be wrong, and what should it emit instead?",
+    "answer": "Local groups can contain different numbers of sales, so their averages cannot be combined with equal weight. Emit **(sum, count)** for each product; combine pairs by summing both components, then have the reducer compute **total sum / total count**.",
+    "sourceHeading": "Discuss potential problems when using a combiner in a MapReduce job that aims to find the average sale price for each product.",
+    "type": "application"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "Only 5% of a job can run in parallel. Use Amdahl’s Law to estimate speedup with 8 processors and with 1,000 processors. Why is the improvement small?",
+    "answer": "For parallel fraction $p=0.05$, $S(N)=1/((1-p)+p/N)$. Thus $S(8)=1/(0.95+0.05/8)\\approx 1.046$ and $S(1000)=1/(0.95+0.05/1000)\\approx 1.053$. The **95% sequential portion** dominates, so adding processors offers little improvement.",
+    "sourceHeading": "Amdahl's Law",
+    "type": "application"
+  },
+  {
+    "course": "Cloud Computing",
+    "prompt": "How does Hadoop recover after a DataNode failure, and when can replication still fail to prevent data loss?",
+    "answer": "The NameNode detects missing heartbeats and schedules new copies of affected blocks on healthy nodes. Existing replicas supply the data, restoring the intended replication level. If **all replicas of a block are lost**, replication cannot reconstruct that block.",
+    "sourceHeading": "How does Hadoop handle data recovery in the case of a DataNode failure?",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "区分 Passive Attack 与 Active Attack，并各举两个例子。",
+    "answer": "**Passive Attack** 观察或获取信息，不改变系统资源，例如 release of message contents、traffic analysis。**Active Attack** 对通信或系统产生未经授权的影响，例如 replay、modification of message contents，也包括 masquerade 和 denial of service。",
+    "sourceHeading": "Security Attacks",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "对称与非对称加密怎样使用密钥？各举一例，能否仅凭“非对称”就认定更安全？",
+    "answer": "**对称加密**的双方使用同一个密钥，通常速度较快，例如 **AES**。**非对称加密**使用相关联但不同的公钥和私钥，通常较慢，可用于交换对称密钥，例如 **RSA**。安全性取决于算法、密钥长度和协议，不能仅凭“非对称”就认定更安全。",
+    "sourceHeading": "对称加密和非对称加密有什么不同？请分别举例",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "One-time pad 对密钥有什么要求？为什么能隐藏明文信息，实际使用又有哪些困难？",
+    "answer": "每条消息使用**真正随机、与消息等长、仅使用一次且保持秘密**的密钥。同一密文配合不同密钥可以对应不同明文，因此密文本身不揭示原文。实际困难包括生成真正随机的大量密钥，以及安全传输、保存这些密钥；实现错误会破坏安全性。",
+    "sourceHeading": "One -time pad",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "Diffie–Hellman 的公开参数为素数 q 和原根 α，双方私钥为 x_A、x_B。写出交换的公开值和共享密钥，并说明未经认证时的风险。",
+    "answer": "交换 $y_A=\\alpha^{x_A} \\bmod q$、$y_B=\\alpha^{x_B} \\bmod q$。Alice 计算 $K_A=y_B^{x_A} \\bmod q$，Bob 计算 $K_B=y_A^{x_B} \\bmod q$，两者均为 $\\alpha^{x_A x_B} \\bmod q$。未经身份认证时，中间人可以替换公开值，分别与双方建立共享密钥。",
+    "sourceHeading": "Diffe-Hellman key exchange",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "使用 RSA 实现 confidentiality 与 digital signature 时，分别由谁使用哪一把密钥？",
+    "answer": "**Confidentiality：**发送方用接收方公钥加密，接收方用自己的私钥解密。**Digital signature：**发送方用自己的私钥签名，接收方用发送方公钥验签。签名针对消息摘要；实际 RSA 签名还包含规定的摘要编码与填充步骤。",
+    "sourceHeading": "RSA",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "解释 hash function 的 preimage resistance、second preimage resistance 和 collision resistance。",
+    "answer": "**Preimage resistance：**给定摘要 c，难以找到 m 使 h(m)=c。**Second preimage resistance：**给定 m，难以找到另一个 n≠m 使 h(n)=h(m)。**Collision resistance：**难以找到任意一对不同的 m、n 使 h(m)=h(n)。",
+    "sourceHeading": "Hash Function",
+    "type": "concept"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "发送者只随消息附上一个普通、无密钥的 hash，是否能证明消息来自发送者？MAC 相比之下增加了什么？",
+    "answer": "不能。无密钥 hash 只有在与**可信摘要**比较时才有助于检测修改，本身不能认证发送者。**MAC** 要求双方共享秘密密钥，为共享密钥的参与方提供**消息完整性**和**数据来源认证**。",
+    "sourceHeading": "Hash Function",
+    "type": "application"
+  },
+  {
+    "course": "Cryptography and Network Security",
+    "prompt": "Digital Signature 提供哪三项主要安全属性？",
+    "answer": "**Authentication**（认证签名来源）、**Integrity**（检测消息是否被修改）、**Non-repudiation**（不可否认性）。",
+    "sourceHeading": "Digital Signature",
+    "type": "concept"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "对两个非对称二元对象，共同为 1 的属性数 q=2，只在第一个对象为 1 的数量 r=0，只在第二个对象为 1 的数量 s=1。计算 dissimilarity，并说明为什么不计共同为 0 的数量。",
+    "answer": "非对称二元距离为 $d=(r+s)/(q+r+s)=1/3$。当取值 **1** 代表更重要的存在/阳性事件时，共同为 **0** 不作为相似性证据，因此不计入分母。",
+    "sourceHeading": "Data matrix 与 dissimilarity matrix",
+    "type": "application"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "5 条交易中，3 条包含 Beer，4 条包含 Diaper，3 条同时包含二者。计算 Beer → Diaper 与 Diaper → Beer 的 support 和 confidence。",
+    "answer": "两条规则的 **support** 都是 $3/5=60\\%$。Beer → Diaper 的 **confidence** 为 $3/3=100\\%$；Diaper → Beer 为 $3/4=75\\%$。Support 看共同出现的比例；confidence 的分母是规则前件出现的次数。",
+    "sourceHeading": "基本概念与 association rules",
+    "type": "application"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "Apriori 的剪枝依据是什么？若 L3={abc,abd,acd,ace,bcd}，self-join 得到 abcd 与 acde，哪一个应被剪枝？",
+    "answer": "**Apriori property：**frequent itemset 的所有非空子集都必须 frequent；不频繁集合的超集也不可能频繁。**acde** 的子集 **ade** 不在 L3，应被剪枝；**abcd** 的所有三项子集都在 L3，因此保留。",
+    "sourceHeading": "Apriori: candidate generation and test",
+    "type": "application"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "Naive Bayes 中 P(yes)=9/14、P(no)=5/14。新样本四个属性在 yes 类下的条件概率为 2/9、4/9、6/9、6/9，在 no 类下为 3/5、2/5、1/5、2/5。应预测哪一类？",
+    "answer": "在给定类别后属性条件独立的假设下，yes 的 likelihood 约为 **0.0439**，乘先验后约 **0.0282**；no 的 likelihood 为 **0.0192**，乘先验后约 **0.00686**。前者更大，预测 **yes**。共同分母 P(X) 不影响比较。",
+    "sourceHeading": "Bayes classification",
+    "type": "application"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "DBSCAN 如何区分 core、border 和 noise？本笔记的 MinPts 是否包含点自身？",
+    "answer": "**Core：**半径 ε 的邻域内点数至少为 MinPts。**Border：**自身不是 core，但在某个 core 的邻域内。**Noise：**既不是 core，也不属于任何 core 的密度可达簇。本笔记采用**邻域包含点自身**的计数约定。",
+    "sourceHeading": "Density-based methods 与 DBSCAN",
+    "type": "concept"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "LOF 为什么能够识别“局部异常”，而不只识别全局离群点？LOF 较大表示什么？",
+    "answer": "LOF 比较对象与其邻居的**局部可达密度**；局部可达密度是平均可达距离的倒数。当对象密度显著低于邻居时，邻居密度与自身密度的比值较大，**LOF 较高**，更可能是局部离群点，即使它未明显远离整个数据集。",
+    "sourceHeading": "局部离群因子（Local Outlier Factor，LOF）",
+    "type": "concept"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "同一次查询中，用“文档与查询向量的点积 / 文档向量范数”给文档排序是否可行？为什么这个值还不能称为真正的 cosine similarity？",
+    "answer": "同一次查询的**查询向量范数**对所有文档相同，可以在排序时省略这个共同正因子。真正的 cosine similarity 仍需用点积除以**文档范数与查询范数的乘积**；省略查询范数得到的是排序分数。",
+    "sourceHeading": "The vector model",
+    "type": "application"
+  },
+  {
+    "course": "Information Processing for the Internet of Things",
+    "prompt": "对 3×3 窗口 [[70,80,90],[120,140,130],[170,180,190]] 做 median filtering，中心像素 140 应替换成多少？",
+    "answer": "排序后为 **70,80,90,120,130,140,170,180,190**。9 个值的中位数是第 5 个值 **130**，因此用 **130** 替换中心像素 **140**。",
+    "sourceHeading": "Non-linear smoothing operator：Median filtering",
+    "type": "application"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "getMax 先令 max=arr[0]，再从下标 1 遍历数组，遇到更大元素就更新 max。传入 {12,45,98,73,60} 返回什么？这个实现对输入数组有什么前提？",
+    "answer": "返回 **98**。它直接访问 `arr[0]`，所以输入必须是**非 null 且非空的数组**。",
+    "sourceHeading": "数组作为参数（下面的 `getMax` 要求数组非空）",
+    "type": "application"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "什么是 Java 方法重载？两个方法只有返回值类型不同，是否构成合法重载？",
+    "answer": "重载要求**方法名相同、参数列表不同**；参数类型、数量或类型顺序可以不同。**不能**只靠返回值类型区分重载，方法名和参数列表相同的方法不能因返回类型不同就重复定义。",
+    "sourceHeading": "方法重载",
+    "type": "concept"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "执行 `String a = new String(\"java\"); String b = new String(\"java\");` 后，`a == b` 与 `a.equals(b)` 分别是什么结果？",
+    "answer": "`a == b` 为 **false**：两次 `new` 创建不同对象，`==` 比较引用是否指向同一对象。`a.equals(b)` 为 **true**：`String.equals()` 比较字符串内容，并区分大小写。",
+    "sourceHeading": "字符串的比较",
+    "type": "application"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "ArrayList<String> 依次添加 \"hello\"、\"world\"、\"java\" 后，`remove(1)` 返回什么？删除后 `size()` 是多少，元素有哪些？",
+    "answer": "`remove(1)` 按索引删除第二个元素，返回 **\"world\"**。删除后 `size()` 为 **2**，元素为 **[hello, java]**。它与 `remove(Object)` 返回“是否成功删除”的布尔值不同。",
+    "sourceHeading": "ArrayList类常用方法",
+    "type": "application"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "为什么静态方法不能直接使用 this 或直接访问某个对象的实例成员？若确实需要访问实例字段，应怎样做？",
+    "answer": "静态方法属于**类**，不依附于某个特定对象，因此没有 `this`。要访问实例字段，必须先取得相应的**对象引用**，再通过该引用访问。通常通过 `类名.方法名()` 调用静态方法。",
+    "sourceHeading": "静态方法及其访问",
+    "type": "concept"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "Java 方法重写对签名、返回类型和访问权限有什么要求？private 和 static 方法属于相同的重写机制吗？",
+    "answer": "子类以**兼容签名**实现父类可重写的实例方法；返回类型相同或采用允许的**协变引用类型**；访问权限**不能缩小**。`private` 方法不被重写，`static` 方法发生的是**隐藏**。",
+    "sourceHeading": "方法重写",
+    "type": "concept"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "父类 A 有字段 x=1 和返回 1 的实例方法 value()；子类 B 有字段 x=2，并重写 value() 返回 2。对 `A obj = new B();`，`obj.x` 与 `obj.value()` 分别得到什么？",
+    "answer": "`obj.x` 得到 **1**：字段按引用的**编译期类型 A**选择。`obj.value()` 得到 **2**：可重写实例方法在运行时按**实际对象类型 B**选择实现，即“编译看左边，运行看右边”。",
+    "sourceHeading": "多态的运行特点",
+    "type": "application"
+  },
+  {
+    "course": "Java Programming",
+    "prompt": "一个类实现两个接口，两个接口都有相同签名的抽象方法。是否一定要写两份实现？什么时候可以只实现一次？",
+    "answer": "不一定。若签名相同、返回类型等要求**兼容**，一个实现即可同时满足两个接口，且必须满足 **public** 访问权限。若返回类型等要求冲突，就不能简单用同一个实现解决。",
+    "sourceHeading": "接口的细节",
+    "type": "concept"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "Classification 与 regression 的 label 分别有什么特点？二者与 unsupervised learning 的关键区别是什么？",
+    "answer": "**Classification** 的 label 是离散变量；**regression** 的 label 是连续变量。二者属于有监督学习，使用带 label 的数据；无监督学习不依赖这些已知 label。",
+    "sourceHeading": "Supervised learning（有监督学习）",
+    "type": "concept"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "一个模型训练误差很小、部署误差很大；另一个模型训练和部署误差都很大。分别是什么问题？为什么不能只看训练集拟合效果？",
+    "answer": "前者是 **overfitting**，可能记住了无关细节；后者是 **underfitting**，无法捕捉底层模式。**Generalisation** 需要结合训练与部署/未见数据表现判断，训练误差小不保证泛化好。",
+    "sourceHeading": "Flexibility、Interpretability 与 fitting",
+    "type": "application"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "何时应规划 test strategy？为什么训练时不应反复查看测试集来选择模型？",
+    "answer": "测试策略应在**训练前**确定；数据应代表目标总体，样本应独立抽取。训练中反复根据测试集选择模型，会破坏最终评估的独立性。测试集用于最终模型评价，而基于数据集的性能估计本身仍是随机量。",
+    "sourceHeading": "总结：Using data correctly",
+    "type": "concept"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "A={−2,−1,0,1,2}、B={1,2,3,4,5} 两类的密度都假设为 Gaussian。用样本方差估计参数，求等先验 Bayes 边界；若 P_A=0.1、P_B=0.9，边界怎样改变？",
+    "answer": "均值为 **0 和 3**，两类样本方差均为 **2.5**。等先验的后验比值为 $e^{(9-6x)/5}$，边界是 **x=1.5**。改为 0.1/0.9 先验后，比值乘以 1/9，边界是 $x=(9-5\\ln(9))/6\\approx -0.331$。两种情形都在小于边界时判 A，大于边界时判 B。",
+    "sourceHeading": "Exercise 1",
+    "type": "application"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "写出 recall、specificity、precision 的公式。提高 recall 与提高 specificity 分别主要减少哪类错误？",
+    "answer": "**Recall / sensitivity** 为 $TP/(TP+FN)$，提高它主要减少 **FN**。**Specificity** 为 $TN/(FP+TN)$，提高它主要减少 **FP**。**Precision** 为 $TP/(TP+FP)$，关注预测为正的样本中有多少真正为正。",
+    "sourceHeading": "评价标准",
+    "type": "concept"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "PCA 怎样决定保留哪些维度？降维后的数据怎样用于后续模型？",
+    "answer": "用各主成分的**解释方差**衡量重要性，排序后去掉方差较低、信息较少的维度；保留的低维表示可作为后续模型输入。这可减少计算复杂度，并可能降低过拟合风险，同时尽量保留重要信息。",
+    "sourceHeading": "PCA 在降维中的作用",
+    "type": "concept"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "一个全连接层有 K 个输入和 L 个 perceptrons，每个单元都带偏置。一共有多少参数？若 K=3、L=4 呢？",
+    "answer": "每个单元有 K 个输入权重和 1 个偏置，总数为 **L(K+1)**。代入 K=3、L=4，得到 **4×(3+1)=16**。",
+    "sourceHeading": "Layer（层）",
+    "type": "application"
+  },
+  {
+    "course": "Machine Learning",
+    "prompt": "从聚类形状看，k-means 与一般 GMM 有什么区别？各分量拥有相同的 diagonal covariance，足以保证球形聚类吗？",
+    "answer": "**k-means** 偏向球形聚类，可联系到各高斯分量具有相同球形协方差的受限 GMM 硬分配形式。**一般 GMM** 可以形成椭圆形聚类。相同的 diagonal covariance **不足以保证球形**，还要求各维方差相同。",
+    "sourceHeading": "$`k`$-means 对比 GMM fitting",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "比较 MOM 的 P2P 与 Pub/Sub：一条消息由谁消费？Pub/Sub 的离线订阅者一定能收到历史消息吗？",
+    "answer": "**P2P：**生产者发往 queue，多个消费者可竞争，但一条消息通常一次交付给一个消费者。**Pub/Sub：**支持一对多或多对多，生产者与订阅者解耦。离线订阅者能否收到先前消息取决于**持久订阅和消息保留**；普通非持久订阅仍有时间依赖。",
+    "sourceHeading": "两种Messaging Models的定义和对比",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "JMS 同步与异步消费分别怎样获取消息？receive() 与 onMessage() 各有什么作用？",
+    "answer": "**同步：**客户端显式调用 `receive()` 获取消息，可阻塞到消息到达或在指定时间后超时。**异步：**客户端注册 message listener，消息到达后，JMS provider 调用监听器的 `onMessage()` 处理消息。",
+    "sourceHeading": "两种JMS Message Consumption的定义",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "HttpServlet 只需处理 POST 时通常重写什么方法？service() 与它有什么关系？throws 是否等同于本地异常处理？",
+    "answer": "通常重写 `doPost(HttpServletRequest, HttpServletResponse)`，`HttpServlet.service()` 按 HTTP 方法分派到它。`throws ServletException, IOException` 把异常交给容器，**不是本地处理**；若要求本地处理，还需 `try/catch`。",
+    "sourceHeading": "写service（）和destroy（）",
+    "type": "application"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "Spring IoC container 负责什么？DI 怎样帮助低耦合与测试？配置元数据有哪些形式？",
+    "answer": "容器根据配置元数据**实例化、配置和组装对象**，对象控制权交给容器。DI 由外部提供依赖，使类尽量独立，降低耦合、提高复用并方便测试。配置可用 **XML、Java annotations、Java code**。",
+    "sourceHeading": "spring container",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "多个线程共享 count，仅声明 volatile 能否让 count++ 线程安全？怎样区分 visibility 与 race condition？",
+    "answer": "不能：`volatile` 保证可见性/有序性，**不会让复合操作 count++ 原子化**。Visibility 关注更新是否对其他线程可见；race condition 指结果依赖线程访问/修改的交错顺序。应让操作原子化，例如读写使用同一把锁，通过 `synchronized` 保护复合操作。",
+    "sourceHeading": "Visibility和Race Conditions",
+    "type": "application"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "MQTT 采用什么消息模型？broker 做什么，为什么适合受限 IoT 设备？",
+    "answer": "MQTT 是基于 **publish/subscribe** 的轻量消息协议。Publisher 把消息交给 **broker**，broker 再路由给匹配的 subscribers。它面向受限设备、低带宽和不可靠网络，通常运行于 TCP/IP 之上，并可使用 TLS 保护传输。",
+    "sourceHeading": "MQTT",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "How does Apache Kafka use replication for fault tolerance? Explain leader and follower replicas.",
+    "answer": "Kafka copies **partition data across brokers**, reducing dependence on a single broker and its storage. The **leader replica** is the main replica, normally handling reads and writes. **Follower replicas** receive replicated writes from the leader. Replication runs automatically, keeping additional copies available when a broker fails.",
+    "sourceHeading": "How Apache Kafk achieve fault tolerance？",
+    "type": "concept"
+  },
+  {
+    "course": "Middleware",
+    "prompt": "OSGi 的 bundle 模型怎样降低开发复杂度？动态添加或移除 bundle 有什么好处？",
+    "answer": "Bundle **隐藏实现细节**，开发者通过 API 使用功能。模块与 bundle 可以复用，减少重复编写代码。动态添加、移除和更新 bundle，使部署与维护更加灵活。",
+    "sourceHeading": "Advantage/features of OSGi",
+    "type": "concept"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "What makes an infrastructure system “smart”? Name the decision-making characteristic and at least three values it should create.",
+    "answer": "Sensor-based decision-making is **autonomous and near real time**. Values include **self-monitoring and accurate decisions**, **efficiency and cost savings**, **reliability**, security/safety/resilience, user interaction, sustainability, lower carbon footprint and better service quality. Any three relevant values satisfy the question.",
+    "sourceHeading": "什么是smart infrastructure？",
+    "type": "concept"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "Does the data analytics-based smart infrastructure process have a true end? Explain with smart street lighting.",
+    "answer": "It is a **cycle**. Define the electricity-saving goal, collect and prepare pedestrian/vehicle data, model a lighting strategy, evaluate savings, deploy it, then collect bills and user feedback. Feed those results back into the model and repeat.",
+    "sourceHeading": "Interrogate data的过程，Data analytics-based smart infrastructure process",
+    "type": "concept"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "A smart car is tested on 300 clips: 250 crossing and 50 non-crossing pedestrians. Model A has TP=250,FN=0,FP=50,TN=0; B has TP=200,FN=50,FP=0,TN=50. Both have 83.33% accuracy. Compare recall and specificity, and explain why accuracy is inadequate.",
+    "answer": "**A:** recall=100%, specificity=0%; it misses no crossing pedestrian in this test but requests a stop for every clip. **B:** recall=80%, specificity=100%; it avoids false alarms but misses 50 crossing pedestrians. Equal accuracy hides very different **FN and FP costs**. Test results alone do not establish safety in every real-world situation.",
+    "sourceHeading": "反馈过程理解",
+    "type": "application"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "Match descriptive, diagnostic, predictive and prescriptive analytics to the question each answers.",
+    "answer": "**Descriptive:** What happened? **Diagnostic:** Why did it happen / why is it happening? **Predictive:** What will happen? **Prescriptive:** What should we do?",
+    "sourceHeading": "Analytics",
+    "type": "concept"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "ECG clips come from 10 people. Why can randomly assigning clips to 5 folds exaggerate performance? How does leave-one-subject-out (LOSO) address this?",
+    "answer": "Random clip splitting can put the **same person** in training and test sets, allowing memorization of subject-specific patterns. LOSO trains on **9 subjects and tests on 1**, repeating across subjects to assess unseen-person generalization. Grouped 5-fold validation is also valid when whole subjects stay in separate folds.",
+    "sourceHeading": "混淆矩阵",
+    "type": "application"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "Smart meters report every 15 or 30 minutes. Explain two ways to align these resolutions, distinguishing interval energy totals from sampled power readings.",
+    "answer": "**Downsampling:** aggregate 15-minute readings into 30-minute intervals—usually sum energy or average power; this uses actual observations but loses short-term detail. **Upsampling:** align to 15-minute intervals, splitting each energy total while preserving its sum, or interpolating sampled power. This introduces estimates and cannot recover missing detail; choose according to the analysis and acceptable error.",
+    "sourceHeading": "第三周",
+    "type": "application"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "Run one K-means iteration on P1=(0,3), P2=(1,2), P3=(2,1), P4=(3,6), P5=(4,0), P6=(5,5), P7=(6,7), with initial C1=(0,3), C2=(4,0). Give the assignments and updated centers.",
+    "answer": "Nearest-center assignment gives **C1={P1,P2,P4,P7}**, whose new mean is **(2.5,4.5)**; **C2={P3,P5,P6}**, whose new mean is **(11/3,2)≈(3.66667,2)**. Reassignment and mean updates are then repeated until stable.",
+    "sourceHeading": "K means",
+    "type": "application"
+  },
+  {
+    "course": "Smart Infrastructure",
+    "prompt": "Hourly NO data show the strongest rise during the morning rush hour and a smaller rise during the evening commute. Is that enough to prove traffic is the main pollution source? What else is needed?",
+    "answer": "The pattern is **consistent with a contribution from transport emissions**, but does not establish the main source or causation on its own. Further **traffic data, weather controls and source analysis** are needed to separate competing factors.",
+    "sourceHeading": "空气质量变化",
+    "type": "application"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "Go-back-N 的接收窗口多大？接收方如何处理乱序帧，发送方超时后重传哪些帧？",
+    "answer": "接收窗口为 **1**，只接受正确且序号正好是期望值的帧；乱序帧被丢弃，不缓存。典型实现采用累计确认，并可重复确认最后一个按序接收的帧。发送方超时后，从出错或丢失的帧起，重传该帧以及随后尚未确认的帧。",
+    "sourceHeading": "Go-back-N",
+    "type": "concept"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "Selective Repeat 的发送、接收窗口大小均为 4 时，序号空间至少需要多大？为什么只有 7 个序号不够？",
+    "answer": "至少需要 **8 个序号**，满足 $m\\ge 2w$。若仅使用序号 0～6，接收方收完 0、1、2、3 后，窗口移到 4、5、6、0；若先前 ACK 丢失，发送方重传旧帧 0，接收方可能把它当成新帧 0。扩大序号空间可避免新接收窗口与仍可能重传的旧帧序号重叠。",
+    "sourceHeading": "Selective Re-transmission Variation",
+    "type": "application"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "TCP 建立连接时，客户端初始序号为 x，服务器初始序号为 y。写出不携带数据的三次握手中每个报文的 SYN、ACK 标志及 seq、ack。",
+    "answer": "1. 客户端 → 服务器：`SYN=1`，`seq=x`，ACK 标志未置位，确认号无效。\n2. 服务器 → 客户端：`SYN=1, ACK=1`，`seq=y`，`ack=x+1`。\n3. 客户端 → 服务器：`ACK=1`，`seq=x+1`，`ack=y+1`。\n\\nSYN 占用一个序号；确认号表示期望接收的下一个序号。",
+    "sourceHeading": "TCP连接时的三次握手和四次挥手（双向连接）",
+    "type": "application"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "TCP 的有效发送窗口如何由拥塞窗口 cwnd 和接收方通告窗口决定？二者分别限制什么？",
+    "answer": "有效发送窗口为 $\\min\\{\\mathrm{cwnd},\\mathrm{advertised\\ window}\\}$。**cwnd** 根据网络拥塞状况限制发送量；**通告窗口**反映接收方可用缓冲空间，用于流量控制，避免接收方来不及处理。",
+    "sourceHeading": "TCP Sliding Window Protocol",
+    "type": "concept"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "IPv4 地址 92.231.1.10/23 的子网掩码、网络地址、广播地址和最后一个可分配给主机的地址分别是什么？",
+    "answer": "- 子网掩码：**255.255.254.0**。\n- 网络地址：**92.231.0.0**。\n- 广播地址：**92.231.1.255**。\n- 最后一个可分配的主机地址：**92.231.1.254**。\n\n/23 表示前 23 位属于网络部分，剩余 9 位属于主机部分。",
+    "sourceHeading": "Subnet",
+    "type": "application"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "某前缀码的码字为 A=0、B=10、C=110。将收到的比特串 10001100 解码为符号序列，并给出码字划分。",
+    "answer": "码字划分为 `10 | 0 | 0 | 110 | 0`，因此符号序列为 **B A A C A**。由于没有一个码字是另一个码字的前缀，可以从左到右逐个唯一识别。",
+    "sourceHeading": "Huffman coding",
+    "type": "application"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "写出带宽为 W、信噪比为 SNR 的信道容量公式，并说明 W、SNR 与容量 C 的单位或含义。",
+    "answer": "$C=W\\log_2(1+\\mathrm{SNR})$，其中 $W$ 是带宽，单位 Hz；$\\mathrm{SNR}$ 是信号功率与噪声功率的**线性比值**；$C$ 的单位是 bit/s。若信号功率为 $P$、带内噪声功率为 $N_0W$，则 $C=W\\log_2(1+P/(N_0W))$。不能直接把以 dB 表示的数值代入 SNR。",
+    "sourceHeading": "Channel capacity",
+    "type": "concept"
+  },
+  {
+    "course": "Communications and Networks",
+    "prompt": "偶校验 Hamming 码收到 101011110101100。位置从左到右按 1～15 编号；校验组 P1、P4 失败，P2、P8 通过。在至多一位出错的假设下，哪一位出错？纠正后的码字是什么？",
+    "answer": "失败校验组的位置权值相加：$1+4=5$，因此是**第 5 位**出错。将该位从 1 翻转为 0，得到 **101001110101100**。这一纠错结论依赖于至多一位出错的假设。",
+    "sourceHeading": "Hamming code 的生成与纠错",
+    "type": "application"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "将 8 位二进制补码 11001011 转换为十进制，并将它符号扩展为 16 位补码。",
+    "answer": "最高位权值为 $-128$，故数值为 $-128+64+8+2+1=-53$。符号扩展时复制符号位 1，得到 **1111111111001011**，数值仍为 $-53$。",
+    "sourceHeading": "加减法与补码",
+    "type": "application"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "字符 S 的 7 位 ASCII 码为 1010011。采用偶校验并把校验位放在最左边，完整码字是什么？偶校验能否保证检出任意两位翻转？",
+    "answer": "`1010011` 含 4 个 1，已是偶数，所以校验位为 0，完整码字为 **01010011**。偶校验不能保证检出两位翻转：偶数位翻转会保持 1 的总数的奇偶性。",
+    "sourceHeading": "奇偶校验（Parity Checking）",
+    "type": "application"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "Karnaugh Map 中，Prime Implicant 与 Essential Prime Implicant 有什么区别？为什么 EPI 必须保留在最小与或式中？",
+    "answer": "**PI** 是无法再扩大的合法分组所对应的蕴含项。**EPI** 至少覆盖一个没有被其他 PI 覆盖的最小项；若省去它，该最小项就无法被覆盖，因此必须保留。若一个 PI 中的每个最小项都能被其他 PI 覆盖，它就不是 EPI。",
+    "sourceHeading": "Essential Prime Implicants（EPIs）",
+    "type": "concept"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "组合逻辑函数为 $F=\\overline A B+AC$。当 B=C=1、只有 A 改变时，为什么可能产生 static-1 hazard？如何增加一个冗余项消除该冒险？",
+    "answer": "理论输出始终为 1，但两条逻辑路径的传播延迟不同，可能使两个乘积项短暂同时为 0，输出出现 $1\\to0\\to1$ 的毛刺。加入冗余项 $BC$：$F=\\overline A B+AC+BC$。在 $B=C=1$ 时，$BC$ 持续为 1，覆盖这次输入变化。",
+    "sourceHeading": "Timing Hazards and Output Glitches",
+    "type": "application"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "JK 触发器在有效时钟沿到来前 Q=1，且 J=K=1，下一状态是什么？同时列出 J、K 的四种输入组合对应的操作。",
+    "answer": "下一状态为 **0**，因为 `J=K=1` 时翻转。\n\n- `00`：保持。\n- `01`：清零。\n- `10`：置一。\n- `11`：翻转。\n\n特征方程为 $Q^{*}=J\\overline Q+\\overline KQ$。",
+    "sourceHeading": "JK Flip-flops",
+    "type": "application"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "Moore 与 Mealy 时序电路的输出分别取决于什么？含有 3 个触发器的电路最多能表示多少个状态？",
+    "answer": "**Moore** 输出仅取决于当前状态；**Mealy** 输出同时取决于当前状态和当前输入。3 个触发器最多能表示 $2^3=8$ 个状态。",
+    "sourceHeading": "1. 概述",
+    "type": "concept"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "全加器的输入为 X、Y、进位 Cin。写出和 S 与输出进位 Cout 的表达式，并说明如何用两个半加器实现。",
+    "answer": "$S=X\\oplus Y\\oplus C_{\\mathrm{in}}$，$C_{\\mathrm{out}}=XY+XC_{\\mathrm{in}}+YC_{\\mathrm{in}}$。\n\n第一个半加器计算 $S_1=X\\oplus Y$、$C_1=XY$；第二个半加器计算 $S=S_1\\oplus C_{\\mathrm{in}}$、$C_2=S_1C_{\\mathrm{in}}$；最后将两个进位相或，得到 $C_{\\mathrm{out}}=C_1+C_2$。式中的 $+$ 表示逻辑或。",
+    "sourceHeading": "7. Full Adder（带之前的进位）",
+    "type": "concept"
+  },
+  {
+    "course": "Digital Circuit Design",
+    "prompt": "一个 ROM 有 2 根地址输入线和 4 根数据输出线。它的“字数 × 每字位数”组织方式及总容量分别是多少？",
+    "answer": "2 根地址线可选择 $2^2=4$ 个字，每字有 4 位，因此组织方式为 **4 × 4**，总容量为 $4\\times4=16$ bit。",
+    "sourceHeading": "判断 ROM 是多少 × 多少",
+    "type": "application"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "命题 $p\\to q$ 与它的逆命题、逆否命题中，哪一个必然等价？将 $p\\to q$ 写成不含蕴涵符号的表达式。",
+    "answer": "与**逆否命题** $\\neg q\\to\\neg p$ 必然等价，与逆命题 $q\\to p$ 一般不等价。不含蕴涵符号的形式为 $\\neg p\\lor q$。",
+    "sourceHeading": "真值表与命题等价",
+    "type": "concept"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "一排共有 25 把椅子，20 人各占一把。证明至少存在连续 4 把椅子都有人坐。",
+    "answer": "一共有 $25-4+1=22$ 组连续四椅。5 把空椅中的每一把最多属于 4 组连续四椅，因此含空椅的组数至多为 $5\\times4=20$。至少还有 $22-20=2$ 组不含空椅，所以必有连续 4 把椅子全部有人。",
+    "sourceHeading": "Functions 函数",
+    "type": "application"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "等价关系需要满足哪三个性质？若集合被划分为 {1,3,5}、{2,6}、{4}，并规定同一块中的元素等价，元素 3 的等价类是什么？",
+    "answer": "等价关系满足**自反性、对称性、传递性**。由划分诱导的关系把同一块中的元素视为等价，因此 $[3]=\\{1,3,5\\}$。划分中的各块非空、两两不交，且并集为原集合。",
+    "sourceHeading": "等价关系与划分",
+    "type": "application"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "从 3 种颜色中选取共 8 个球，每种颜色的球数量充足且同色球不可区分，只计每种颜色选了多少个，允许某种颜色选 0 个。共有多少种选择？",
+    "answer": "设三种颜色的数量为 $x_1,x_2,x_3\\ge0$，则需计数 $x_1+x_2+x_3=8$ 的非负整数解。用隔板法，方案数为 $\\binom{8+3-1}{3-1}=\\binom{10}{2}=45$。",
+    "sourceHeading": "排列、组合与重复元素",
+    "type": "application"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "一个至少含一条边的无向图存在 Euler circuit 的充要条件是什么？为什么其中的顶点度数必须为偶数？",
+    "answer": "所有非孤立顶点位于同一个连通分量，且每个顶点的度数都是偶数。Euler circuit 每条边恰好经过一次并返回起点，每次进入一个顶点都要沿另一条边离开，因此关联边可成对计数，度数必须为偶数。",
+    "sourceHeading": "连通性、路径与回路",
+    "type": "concept"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "利用 Euler 公式和二部图的面长约束，证明完全二部图 $K_{3,3}$ 不是平面图。",
+    "answer": "假设它可平面嵌入。它有 $v=6$、$e=9$，由 $v-e+f=2$ 得 $f=5$。$K_{3,3}$ 是二部图，没有三角形，各面边界长度至少为 4，因此 $2e\\ge4f$。但 $2e=18<20=4f$，矛盾，所以它不是平面图。",
+    "sourceHeading": "Planar Graphs 平面图",
+    "type": "application"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "Prim 与 Kruskal 算法在选择下一条边时有什么不同？Kruskal 为什么不能加入形成环的边？",
+    "answer": "**Prim** 从当前生成树出发，选择连接树内顶点与树外顶点的最小权边；**Kruskal** 按边权从小到大考察，只有不形成环的边才加入。生成树必须连通且无环，加入成环边不会连接新的分量，因而应跳过。",
+    "sourceHeading": "最小生成树",
+    "type": "concept"
+  },
+  {
+    "course": "Discrete Mathematics",
+    "prompt": "Ford–Fulkerson 算法如何沿增广路更新流量？残余网络中的反向边有什么作用，算法何时停止？",
+    "answer": "从零流开始，在残余网络中寻找源点到汇点的增广路，以路上最小残余容量为增广量。沿正向边增加流量，沿反向边减少原有流量，再更新残余网络。反向边允许撤回、调整先前的流量分配。直到不存在源点到汇点的增广路时停止。",
+    "sourceHeading": "最大流与割",
+    "type": "concept"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "在一个采用 LM35、STM32 和 LCD 的温度监测嵌入式系统中，这三个部件分别承担什么任务？",
+    "answer": "**LM35** 感知温度并输出模拟信号；**STM32** 通过 ADC 获取信号并进行处理；**LCD** 显示温度结果。整个系统围绕温度监测这一特定用途设计。",
+    "sourceHeading": "What is an Embedded System？",
+    "type": "application"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "CPU 执行一条指令通常包括哪三个基本阶段？各阶段做什么？",
+    "answer": "1. **Fetch（取指）**：从指令存储器读取指令。\n2. **Decode（译码）**：解释指令，确定需要执行的操作。\n3. **Execute（执行）**：控制相关硬件完成操作。",
+    "sourceHeading": "How CPU execute the instructions？",
+    "type": "concept"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "ARM 函数调用中，Link Register（LR）的主要作用是什么？",
+    "answer": "LR 保存函数的**返回地址**，即被调用函数完成后应继续执行的位置。函数返回时可利用该地址恢复调用者的执行流程。",
+    "sourceHeading": "什么是LR？",
+    "type": "concept"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "从中断请求产生到恢复原程序，处理一次中断的主要流程是什么？",
+    "answer": "1. 接收到中断请求。\n2. 保存被打断程序的上下文。\n3. 根据中断向量表找到对应的 ISR。\n4. 执行 ISR，处理事件。\n5. 恢复上下文，返回原程序继续执行。",
+    "sourceHeading": "What is the process of handling interrupt？",
+    "type": "concept"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "USART 使用 9600 baud、1 个起始位、8 个数据位、1 个停止位且无奇偶校验。外设时钟为 16 MHz，采用 16 倍过采样。发送一帧需多久？USARTDIV 和 BRR 应如何设置？",
+    "answer": "每帧共 10 bit，时间为 $10/9600\\approx1.0417\\ \\mathrm{ms}$。\n\n$\\mathrm{USARTDIV}=16\\times10^6/(16\\times9600)\\approx104.1667$。整数部分为 104（`0x68`）；小数部分编码为 $\\operatorname{round}(0.1667\\times16)=3$，所以 **BRR=0x0683**。",
+    "sourceHeading": "USART 例题：9600 baud 与 16 倍过采样",
+    "type": "application"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "一个向下计数器从设置值数到 0，时钟频率为 1 MHz。若希望每 1 ms 产生一次周期事件，Start Value 应设为多少？",
+    "answer": "按 $\\mathrm{Start\\ Value}=\\operatorname{round}(T\\times f)-1$，得到 $\\operatorname{round}(0.001\\times10^6)-1=999$。因此设置值为 **999**，对应 1000 个计数时钟。",
+    "sourceHeading": "Start Value计算",
+    "type": "application"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "PWM 波形每周期高电平持续 200 μs、低电平持续 800 μs。求周期、频率和占空比。",
+    "answer": "周期 $T=200+800=1000\\ \\mu\\mathrm{s}=1\\ \\mathrm{ms}$；频率 $f=1/T=1000\\ \\mathrm{Hz}$；占空比 $D=200/(200+800)=20\\%$。",
+    "sourceHeading": "占空比计算题",
+    "type": "application"
+  },
+  {
+    "course": "Embedded Systems",
+    "prompt": "I²C 主机要向 7 位地址为 0x28 的从机写数据。发送的“地址 + R/W”字节是多少？第 9 个时钟的 ACK 由谁产生？",
+    "answer": "地址 `0x28` 的 7 位二进制为 `0101000`；写操作的 R/W 位为 0，所以发送 `01010000`，即 **0x50**。第 9 个时钟期间，主机释放 SDA，由接收方从机将 SDA 拉低表示 ACK。",
+    "sourceHeading": "I2C的问答题",
+    "type": "application"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "什么是进程？为什么仅有程序代码还不足以完整描述一个正在执行的进程？",
+    "answer": "进程是**正在执行的程序实例**。除代码外，还需要执行状态，例如程序计数器、栈指针、寄存器和数据，以及已分配的内存、打开的文件等资源；这些信息共同决定程序接下来如何继续执行。",
+    "sourceHeading": "3、What is a Process ?",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "Round Robin 调度的时间片过大或过小分别会带来什么问题？",
+    "answer": "时间片**过大**会降低交互响应性，计算密集型进程可能长时间占用 CPU；时间片**过小**会导致频繁上下文切换，使调度与切换开销占比增大。时间片需要在响应速度与切换开销之间权衡。",
+    "sourceHeading": "30、Time Quantum Size（q的大小）",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "硬链接与符号链接分别引用什么？删除文件的原路径后，另一条硬链接和指向原路径的符号链接通常各会怎样？",
+    "answer": "**硬链接**是同一 inode 的另一个名字；只删除原路径时，内容仍可通过另一条硬链接访问。**符号链接**保存目标路径；若原路径已不存在，指向它的符号链接会成为悬空链接。",
+    "sourceHeading": "15、Link",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "DMA 如何减少 CPU 在 I/O 数据传输中的工作量？CPU 是否因此完全不参与 I/O？",
+    "answer": "DMA 控制器负责设备与主存之间的数据块传输，CPU 不必逐个字搬运数据。CPU 仍需设置传输参数，并在完成或异常时处理中断等后续工作。因此 DMA 减少的是逐项搬运开销，并非让 CPU 完全退出 I/O。",
+    "sourceHeading": "（2）直接内存访问（DMA，Direct Memory Access）",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "页大小为 4096 byte，页表中逻辑页 0 映射到物理页框 10，逻辑页 2 的 present bit 为 0。访问逻辑地址 307 和 8192 时分别会发生什么？",
+    "answer": "- 地址 **307**：页号为 0，页内偏移为 307，所以物理地址为 $10\\times4096+307=41267$。\n- 地址 **8192**：页号为 2，页内偏移为 0；该页不在内存中，因此触发 **page fault**，不能直接完成本次地址转换。",
+    "sourceHeading": "（1）page size is 4096 bytes，根据logical address写physical address",
+    "type": "application"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "TLB 缓存的是什么？它为什么能加快虚拟内存访问？",
+    "answer": "TLB 缓存近期使用的**虚拟页到物理页框的地址转换信息**，而不是应用数据本身。命中时可直接获得转换结果，减少查页表所需的内存访问。",
+    "sourceHeading": "（8）TLB（Translation Lookaside Buffer）定义",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "发生死锁所需的四个必要条件分别是什么？请简要解释。",
+    "answer": "- **Mutual exclusion（互斥）**：某些资源一次只能由一个执行实体使用。\n- **Hold and wait（占有并等待）**：已经占有资源，同时等待其他资源。\n- **No preemption（不可抢占）**：已分配资源不能被强行收回，只能主动释放。\n- **Circular wait（循环等待）**：存在首尾相接的等待链，每个成员等待下一个成员占有的资源。",
+    "sourceHeading": "2、四个Conditions for Deadlocks",
+    "type": "concept"
+  },
+  {
+    "course": "Operating Systems",
+    "prompt": "共享计数器初始值为 0，两个线程各执行 1000 次 `x = x + 1`，最终结果却可能小于 2000。原因是什么？如何避免？",
+    "answer": "`x = x + 1` 包含读、加一、写回等步骤，通常不是原子操作。两个线程可能读到同一个旧值，各自写回同一个新值，造成更新丢失；结果取决于执行交错，属于竞争条件。应将完整的读改写放入由**同一把锁**保护的临界区，或使用相应的原子递增操作。",
+    "sourceHeading": "15、Race Conditions",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "已知 $P(A)=0.5$、$P(B)=0.6$、$P(B\\mid\\overline A)=0.4$，求 $P(B\\mid A)$。",
+    "answer": "按全概率公式，$P(B)=P(B\\mid A)P(A)+P(B\\mid\\overline A)P(\\overline A)$。因此 $P(B\\mid A)=(0.6-0.4\\times0.5)/0.5=\\boxed{0.8}$。",
+    "sourceHeading": "Bayes' Theorem：贝叶斯公式",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "对三个事件 A、B、C，“两两独立”和“相互独立”的条件有什么区别？两两独立能否直接推出相互独立？",
+    "answer": "两两独立要求 $P(AB)=P(A)P(B)$、$P(AC)=P(A)P(C)$、$P(BC)=P(B)P(C)$。相互独立还要求 $P(ABC)=P(A)P(B)P(C)$。因此**两两独立不能直接推出相互独立**。",
+    "sourceHeading": "Pairwise 与 Mutually Independent",
+    "type": "concept"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "连续随机变量 X 的密度为 $f_X(x)$。令 $Y=X^2$，用分布函数法求 Y 在 y>0 时的密度，并说明 y<0 时的情况。",
+    "answer": "当 $y\\ge0$，$F_Y(y)=P(-\\sqrt y\\le X\\le\\sqrt y)=F_X(\\sqrt y)-F_X(-\\sqrt y)$。对 $y>0$ 求导得 $f_Y(y)=[f_X(\\sqrt y)+f_X(-\\sqrt y)]/(2\\sqrt y)$。当 $y<0$ 时，分布函数和密度均为 0。",
+    "sourceHeading": "题型 3：平方变换",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "若 $X\\sim\\mathrm{Exp}(\\lambda)$，其中 λ 是率参数，写出均值、方差和无记忆性公式。",
+    "answer": "$E(X)=1/\\lambda$，$\\operatorname{Var}(X)=1/\\lambda^2$。无记忆性为 $P(X>t+s\\mid X>t)=P(X>s)$，其中 $s,t\\ge0$；已经等待 t 后，还需等待超过 s 的概率与从头等待超过 s 的概率相同。",
+    "sourceHeading": "二、Exponential Distribution：指数分布",
+    "type": "concept"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "二维连续随机变量的联合密度在 $x>0,y>0,2x+y<4$ 时为 $f(x,y)=\\frac3{16}(4-2x-y)$，其他地方为 0。求 $P(Y\\ge2\\mid X=1/2)$。",
+    "answer": "先求边缘密度：$f_X(x)=\\frac38(2-x)^2$，$0<x<2$。因此给定 $X=1/2$ 时，条件密度为 $f_{Y\\mid X}(y\\mid1/2)=2(3-y)/9$，$0<y<3$。故 $P(Y\\ge2\\mid X=1/2)=\\int_2^3 2(3-y)/9\\,dy=\\boxed{1/9}$。",
+    "sourceHeading": "Example：条件密度与条件事件",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "公平硬币独立抛掷 40 次，令 X 为正面次数。如何用带连续性修正的正态近似估计 $P(X=20)$？请同时写出精确概率表达式。",
+    "answer": "$X\\sim B(40,1/2)$，均值为 20，方差为 10。令 $Y\\sim N(20,10)$，则 $P(X=20)\\approx P(19.5<Y<20.5)=\\Phi(0.5/\\sqrt{10})-\\Phi(-0.5/\\sqrt{10})$。若按笔记查表把端点取为 $\\pm0.16$，结果为 **0.1272**。精确值为 $\\binom{40}{20}2^{-40}\\approx0.12537$。",
+    "sourceHeading": "三、The Central Limit Theorem",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "随机过程 $X_t=a\\sin(\\omega t+\\Theta)$ 中，a、ω 为常数，$\\Theta\\sim U(0,2\\pi)$。求均值、自相关函数和方差，并判断是否广义平稳。",
+    "answer": "$\\mu_X(t)=0$；$R_X(t_1,t_2)=\\frac{a^2}{2}\\cos[\\omega(t_2-t_1)]$；$\\operatorname{Var}(X_t)=a^2/2$。均值为常数，自相关仅依赖时间差，因此该过程**广义平稳**。",
+    "sourceHeading": "Example：随机相位正弦波",
+    "type": "application"
+  },
+  {
+    "course": "Probability and Stochastic Processes",
+    "prompt": "马尔可夫链状态为 {0,1,2}，初始分布为 $(1/3,1/3,1/3)$，转移矩阵各行为 $(3/4,1/4,0)$、$(1/4,1/2,1/4)$、$(0,3/4,1/4)$。求 $P(X_2=1)$ 和不变分布。",
+    "answer": "$P^2$ 的状态 1 对应列为 $(5/16,1/2,9/16)^T$，所以 $P(X_2=1)=\\frac13(5/16+1/2+9/16)=\\boxed{11/24}$。\n\n求解 $\\boldsymbol\\pi=\\boldsymbol\\pi P$、$\\pi_0+\\pi_1+\\pi_2=1$，得 $\\pi_0=\\pi_1=3\\pi_2$，因此不变分布为 $\\boldsymbol\\pi=(3/7,3/7,1/7)$。",
+    "sourceHeading": "三状态链例题",
+    "type": "application"
+  },
+  {
+    "course": "RFID",
+    "prompt": "与条码相比，RFID 在读取方式、批量识别和物品身份管理方面有哪些优势？",
+    "answer": "RFID 通过无线电通信，通常不要求像条码一样保持直接光学视线；可以快速识别多个标签，并可利用标签标识追踪单件物品。实际读取距离和可靠性仍受频段、标签及环境影响。",
+    "sourceHeading": "Barcode 对比 RFID",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "Passive tag 与 active tag 的供能方式有什么区别？这通常如何影响体积、成本和读取距离？",
+    "answer": "**Passive tag** 从读写器信号中获取能量，不需要自身电池，通常更小、更便宜。**Active tag** 使用自身电池供能，通常体积和成本更高，但可支持更远距离及更复杂的功能。",
+    "sourceHeading": "passive 对比 active tags",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "RFID 中 LF、HF、UHF 的典型工作频段分别是什么？UHF 在数据速率和环境适应性上有什么主要特点？",
+    "answer": "典型频段：**LF 为 125～134 kHz，HF 为 13.56 MHz，UHF 为 860～960 MHz**。UHF 通常具有较高数据速率、较长读取距离，适合快速移动物品识别；但金属、水和人体等环境因素可能显著影响其传播与读取效果。",
+    "sourceHeading": "LF 、 HF 、 UHF 的优缺点",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "RFID reader 的 Signal Processing and Control Module 主要承担哪些功能？至少列出四项。",
+    "answer": "- 与上层主机通信并执行指令。\n- 控制与标签之间的通信。\n- 编码和解码。\n- 执行防碰撞算法。\n- 加密、解密及身份认证。",
+    "sourceHeading": "function of Signal Processing and Control Module",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "RFID middleware 中 reader adapter、event manager 和 application interface 分别负责什么？",
+    "answer": "**Reader adapter** 负责连接和适配读写器；**event manager** 处理原始读取事件并进行过滤；**application interface** 向应用提供读写器管理和获取已过滤事件的接口。",
+    "sourceHeading": "RFID middleware function",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "评估 RFID 的 Link Budget 时需要考虑哪两个传输方向，以及哪些主要影响因素？",
+    "answer": "需要分别考虑**读写器到标签的前向链路**和**标签到读写器的反向链路**。主要因素包括读写器发射功率、传播路径损耗，以及标签工作所需的最低激活能量。",
+    "sourceHeading": "Link Budget 的决定因素",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "CRC 在 RFID 通信中的主要用途是什么？CRC 检测到错误后，能否仅凭 CRC 直接纠正任意错误？",
+    "answer": "CRC 用于**检错**，帮助识别传输数据是否损坏，从而提高通信可靠性。CRC 本身并不提供通用的纠错能力，不能仅凭校验结果直接纠正任意错误。",
+    "sourceHeading": "CRC",
+    "type": "concept"
+  },
+  {
+    "course": "RFID",
+    "prompt": "Frame-Slotted ALOHA 的一帧包含 8 个时隙。标签随机选择的时隙计数器有哪些可能值？标签何时发送，成功识别后如何处理？",
+    "answer": "计数器从 **0～7** 中随机选择。时隙开始时，计数器为 0 的标签发送，其余标签等待并递减计数器；成功识别的标签进入休眠或退出本轮竞争，未成功识别的标签在后续帧重新选择时隙。",
+    "sourceHeading": "Frame ‑ Slotted ALOHA （最常用的 ALOHA ）",
+    "type": "application"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "如何用总能量和平均功率区分能量信号与功率信号？一个有限非零能量信号的平均功率是多少？",
+    "answer": "**能量信号**满足 $0<E_x<\\infty$，其平均功率为 $P_x=0$。**功率信号**满足 $0<P_x<\\infty$，其总能量为无穷。并非所有信号都属于这两类。",
+    "sourceHeading": "能量与功率",
+    "type": "concept"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "若系统对输入 x(t) 的输出为 y(t)，检验时不变性时应该比较哪两个结果？",
+    "answer": "应比较：①将输入先平移，得到 $T\\{x(t-\\tau)\\}$；②将原输出平移，得到 $y(t-\\tau)$。若对任意输入与平移量均有 $T\\{x(t-\\tau)\\}=y(t-\\tau)$，系统就是时不变的。",
+    "sourceHeading": "线性与时不变性",
+    "type": "concept"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "已知 LTI 系统的单位冲激响应 h 和输入 x，连续时间与离散时间的输出分别如何通过卷积计算？",
+    "answer": "连续时间：$y(t)=\\int_{-\\infty}^{\\infty}x(\\tau)h(t-\\tau)\\,d\\tau$。离散时间：$y[n]=\\sum_{k=-\\infty}^{\\infty}x[k]h[n-k]$。单位冲激响应分别为 $h(t)=T\\{\\delta(t)\\}$、$h[n]=T\\{\\delta[n]\\}$。",
+    "sourceHeading": "连续与离散卷积",
+    "type": "concept"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "矩形脉冲 $x(t)=A\\,\\mathrm{rect}(t/T)$ 的傅里叶变换是什么？以 Hz 为频率变量，并取 $\\mathrm{sinc}(u)=\\sin(\\pi u)/(\\pi u)$。求频谱在零频处的值和非零零点位置。",
+    "answer": "$X(f)=AT\\,\\mathrm{sinc}(fT)$。零频处 $X(0)=AT$，等于脉冲面积；当 $A\\ne0$、$T>0$ 时，非零零点位于 $f=k/T$，其中 $k=\\pm1,\\pm2,\\ldots$。",
+    "sourceHeading": "Rectangular Pulse（Rect Function）",
+    "type": "application"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "已知 $x(t)\\leftrightarrow X(f)$，其中 f 的单位为 Hz。分别写出 $x(t-c)$ 与 $x(t)\\cos(2\\pi f_0t)$ 的傅里叶变换。",
+    "answer": "时间平移：$x(t-c)\\leftrightarrow X(f)e^{-j2\\pi fc}$。余弦调制：$x(t)\\cos(2\\pi f_0t)\\leftrightarrow\\frac12[X(f-f_0)+X(f+f_0)]$，即频谱左右各平移一个副本，每个副本的幅度为原来的一半。",
+    "sourceHeading": "傅里叶变换性质",
+    "type": "application"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "离散复指数 $e^{j\\Omega n}$ 成为周期序列的条件是什么？为什么 Ω 相差 $2\\pi$ 的整数倍时会表示同一序列？",
+    "answer": "需要存在正整数 $N$ 和整数 $k$，使 $\\Omega N=2\\pi k$，即 $\\Omega/(2\\pi)$ 为有理数。对整数 n，有 $e^{j(\\Omega+2\\pi k)n}=e^{j\\Omega n}e^{j2\\pi kn}=e^{j\\Omega n}$，所以这些频率产生相同序列。",
+    "sourceHeading": "离散时间周期与频率",
+    "type": "concept"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "信号 $x(t)=7+4\\cos(2\\pi t-7\\pi/8)+2\\cos(6\\pi t+\\pi/8)$ 的最高频率和 Nyquist rate 分别是多少？若将信号改为 x(2t)，它们如何变化？",
+    "answer": "原信号最高角频率为 $6\\pi$ rad/s，即 **3 Hz**；Nyquist rate 为 **6 Hz**，实际采样通常应高于该临界值。变为 $x(2t)$ 后频率与带宽均加倍，最高频率为 **6 Hz**，Nyquist rate 为 **12 Hz**。",
+    "sourceHeading": "D/A Conversion：重建连续信号",
+    "type": "application"
+  },
+  {
+    "course": "Signals and Systems",
+    "prompt": "对因果、适当的有理 LTI 系统，如何依据传递函数极点判断 BIBO 稳定性？虚轴上的极点是否满足 BIBO 稳定条件？",
+    "answer": "只有所有极点均位于复平面的**开左半平面**时，系统才满足 BIBO 稳定条件。存在右半平面极点时不稳定；虚轴上存在极点也不满足 BIBO 稳定条件。",
+    "sourceHeading": "Stability 与计算技巧",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "马克思主义中国化时代化包括哪三层含义？",
+    "answer": "1. 运用马克思主义的立场、观点、方法观察时代、把握时代、引领时代，解决中国革命、建设和改革的实际问题。\n2. 总结、提炼中国实践经验，并将其上升为理论，丰富和发展马克思主义。\n3. 用中国人民喜闻乐见的民族语言阐述马克思主义，使其植根中华优秀传统文化，体现中国特点、中国风格、中国气派。",
+    "sourceHeading": "马克思主义中国化时代化的三层含义：",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "毛泽东思想活的灵魂包括哪三个方面？其中核心和精髓是什么？",
+    "answer": "活的灵魂是**实事求是、群众路线、独立自主**。其中，**实事求是**是毛泽东思想的核心和精髓。",
+    "sourceHeading": "毛泽东思想的主要内容和活的灵魂（选择）",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "新民主主义革命的总路线是什么？其中明确反对的三个对象是什么？",
+    "answer": "总路线是：**无产阶级领导的，人民大众的，反对帝国主义、封建主义和官僚资本主义的革命**。三个对象分别是帝国主义、封建主义、官僚资本主义。",
+    "sourceHeading": "新民主主义革命的总路线和基本纲领（大题加选择）",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "新民主主义革命的道路是什么？取得胜利的三大法宝是什么？",
+    "answer": "革命道路是**农村包围城市、武装夺取政权**。三大法宝是**统一战线、武装斗争、党的建设**。",
+    "sourceHeading": "新民主主义革命的道路和基本经验（选择）",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "党在过渡时期总路线中的“一化三改”分别指什么？",
+    "answer": "**一化**是社会主义工业化；**三改**是对个体农业、手工业和资本主义工商业的社会主义改造。",
+    "sourceHeading": "过渡时期总路线的主要内容：",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "社会主义初级阶段基本路线中的“一个中心、两个基本点”分别是什么？各自承担什么作用？",
+    "answer": "**一个中心**是以经济建设为中心，回答根本任务问题；**两个基本点**是坚持四项基本原则、坚持改革开放。四项基本原则提供政治保证，改革开放提供发展动力和外部条件。",
+    "sourceHeading": "党初级阶段的基本路线的内容：",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "“三个代表”重要思想要求中国共产党始终代表什么？它进一步回答了党的建设中的什么问题？",
+    "answer": "始终代表**中国先进生产力的发展要求、中国先进文化的前进方向、中国最广大人民的根本利益**。它进一步回答了**建设什么样的党、怎样建设党**的问题。",
+    "sourceHeading": "“三个代表”重要思想",
+    "type": "concept"
+  },
+  {
+    "course": "毛概",
+    "prompt": "科学发展观的第一要义、核心立场、基本要求和根本方法分别是什么？",
+    "answer": "- **第一要义**：推动经济社会发展。\n- **核心立场**：以人为本。\n- **基本要求**：全面协调可持续。\n- **根本方法**：统筹兼顾。",
+    "sourceHeading": "科学发展观的科学内涵（大题+选择）",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "有哪几种Software process models？",
+    "answer": "- **Traditional:** Waterfall、Evolutionary development、The Rational Unified Process (RUP).\n- **Modern:** Agile software development.",
+    "sourceHeading": "有哪几种Software process models？",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Suggest the most appropriate software process for developing a system to control anti-lock braking in a car. Give your reasons.",
+    "answer": "1. waterfall model.\n\n2. Because anti-lock braking system is a safety-critical system, so requires a lot of up-front analysis before implementation.\n\n3. Waterfall model is a plan-driven process with the requirements carefully analyzed.",
+    "sourceHeading": "Suggest the most appropriate software process for developing a system to control anti-lock braking in a car. Give your reasons.",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What is Agile?",
+    "answer": "Agile software development is lightweight and highly iterative, with short iterations, frequent releases, close customer involvement and an ability to respond to change. It focuses on delivering value to the customer. Testing is frequent; test-driven development is a practice often used with Agile.",
+    "sourceHeading": "What is Agile?",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A university is planning to develop a virtual reality classroom system to enhance remote teaching and learning experience. Suggest the most appropriate software process model that might be used for developing this system. Give your reasons.",
+    "answer": "Use an **Agile software development process**.\n\n- Requirements may be changing or unclear; Agile welcomes change and lets the university refine requirements during development.\n- Short iterations deliver usable features early.\n- Frequent customer involvement lets teachers and students provide feedback.\n- Frequent testing and improvement support an interactive, user-friendly VR experience.\n- Building and testing in small increments helps manage the complexity and risks of VR technology.",
+    "sourceHeading": "Agile适用的场景和理由",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A startup is developing an interactive, user-friendly fitness app with guided workout routines, activity tracking and personalized recommendations. It has ambitious growth plans, expects frequent customer feedback and feature updates, and must respond to changing market demands. The development team is highly skilled and experienced.\n\nWhy is Agile suitable for this project? Link your reasons to Agile principles.",
+    "answer": "- **Embrace change:** requirements and market demands are changing, so the team must be able to revise its plans.\n- **Incremental delivery:** deliver usable features step by step rather than waiting for the entire app.\n- **Customer involvement:** incorporate frequent user feedback throughout development.\n- **People over process:** experienced developers can collaborate and organize their work effectively.\n- **Maintain simplicity:** focus on the features users need and keep the app easy to use.",
+    "sourceHeading": "Why Agile is suitable for this project (with links to Agile principles) ?",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A startup is developing an interactive, user-friendly fitness app with guided workout routines, activity tracking and personalized recommendations. It has ambitious growth plans, expects frequent customer feedback and feature updates, and must respond to changing market demands. The development team is highly skilled and experienced.\n\nIdentify a functional requirement that has the highest priority and explain why. Write a detailed user story for that function.",
+    "answer": "One suitable answer is **user registration and login**, assuming personalized workouts and activity history require an account.\n\n- **Functional requirement:** The user shall be able to register and log in to the fitness app.\n- **Reason:** This supports personal data storage, workout history, tailored recommendations and user feedback, which are central to the startup's goals.\n- **User story:** As a new user, I want to register and log in to the fitness app, so that I can access my personal workouts, track my progress, and get tailored recommendations.",
+    "sourceHeading": "User story的模版",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "“The software should be portable.” What is the problem with this non-functional requirement? Rewrite it so that it can be verified.",
+    "answer": "“Portable” is too vague to provide a pass/fail acceptance criterion. Specify the required platforms, for example: **The software shall run on both macOS and Windows.** Verification consists of installing and exercising the agreed functions on the specified supported versions of both systems.",
+    "sourceHeading": "\"The software should be portable\" There is problem with the statement, rewrite it.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "One non-functional requirement for a mobile app is: “Energy-efficient: make the app more usable on low-power mobile devices and help reduce the overall carbon footprint.” Suggest a method to verify this requirement and rewrite it to make it verifiable.",
+    "answer": "**Verifiable requirement:** The app shall consume no more than 4 percentage points of battery over 30 minutes of the agreed typical-use test script on specified devices, with fixed OS version, screen brightness and network conditions.\n\n**Verification:** Record the initial battery level, run the same 30-minute script under the specified conditions, and record the final level. Control background activity and repeat the test. Check that the battery drop meets the 4-percentage-point threshold.",
+    "sourceHeading": "\"The software should be portable\" There is problem with the statement, rewrite it.",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify a non-functional requirement and rewrite it in a way that can be verified.",
+    "answer": "1. The app should be portable.\n\n2. The app should be able to run on both MacOS and Windows.",
+    "sourceHeading": "Identify a non-functional requirement and rewrite it in a way that can be verified.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What is the multiplicity of an association? Give an example.",
+    "answer": "Multiplicity states how many instances at one end of an association may be associated with one instance at the other end.\n\nFor example, `Owner 0..1 — 0..* Dog` means an owner may have zero or more dogs, while a dog has at most one owner. The multiplicity is written at the end whose instances are being counted.",
+    "sourceHeading": "What is the multiplicity of an association? Give an example.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A hospital is developing a medical record management system used by doctors, nurses, pharmacists and patients. Each patient has a medical card with a name and unique medical identification number. A patient schedules an appointment with a doctor. During the visit, the doctor retrieves the patient's record and issues prescriptions, which are sent to pharmacists and nurses. Outpatients return home after receiving medication. Inpatients stay in a ward under nurses' care until a doctor discharges them.\n\nDescribe the three main stereotypes of analysis classes and identify suitable classes in each category.",
+    "answer": "- **Entity classes** represent domain information: `Doctor`, `Nurse`, `Pharmacist`, `Patient`, `MedicalCard`, `Appointment`, `Prescription`, `Ward`.\n- **Boundary classes** handle interaction between the system and its users or external systems: `DoctorUI`, `NurseUI`, `PharmacistUI`, `PatientUI`, `AppointmentUI`, `PrescriptionUI`.\n- **Control classes** coordinate use cases and workflows: `AppointmentScheduler`, `RecordManager`, `PrescriptionController`, `WardAdmissionController`, `WardDischargeController`.\n\nClass names are normally singular nouns; control classes often correspond to actions and their objects.",
+    "sourceHeading": "识别三种stereotypes",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A hospital is developing a medical record management system used by doctors, nurses, pharmacists and patients. Each patient has a medical card with a name and unique medical identification number. A patient schedules an appointment with a doctor. During the visit, the doctor retrieves the patient's record and issues prescriptions, which are sent to pharmacists and nurses. Outpatients return home after receiving medication. Inpatients stay in a ward under nurses' care until a doctor discharges them.\n\nCreate a simple UML class diagram showing relationships, including inheritance. Include only class names in the diagram.",
+    "answer": "A suitable model has the following inheritance structure:\n\n- `Person` → `Patient`, `Staff`.\n- `Patient` → `OutPatient`, `InPatient`.\n- `Staff` → `Doctor`, `Nurse`, `Pharmacist`.\n\nThe generalization arrow's hollow triangle points to the parent class.\n\nAssociations include:\n\n- Each `Patient` has one `MedicalCard`.\n- Each currently admitted `InPatient` is assigned to one `Ward`; a ward may hold multiple inpatients.\n- A `Patient` schedules appointments; a `Doctor` attends appointments.\n- An `Appointment` may issue zero or more prescriptions. An appointment that has not yet taken place may have none.\n- `Nurse` and `Pharmacist` process prescriptions and treat patients.\n\nDo not invent mandatory nurse/pharmacist multiplicities that the scenario does not specify.",
+    "sourceHeading": "识别三种stereotypes",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A digital library is being developed for QMUL staff, students and public members. Some users can read books inside the library but cannot borrow them; others can both read and borrow. Library administrators can check books in and out. Librarians can perform all of these duties and order new books. Identify entity classes and draw a UML class diagram showing their relationships.",
+    "answer": "Use `LibraryMember`, `Reader`, `Borrower`, `Administrator`, `Librarian` and `Book`.\n\n- `Reader` and `Administrator` specialize `LibraryMember`.\n- `Borrower` specializes `Reader`.\n- `Librarian` combines the `Administrator` and `Borrower` roles, covering all the stated duties.\n- `Reader` reads books; `Borrower` borrows and returns them.\n- `Administrator` checks books in and out; `Librarian` orders books.\n- If `Book` means a single physical copy, it has at most one current borrower, while a borrower may hold multiple copies.\n\nExample attributes are member ID, name and email for `LibraryMember`, and staff ID for `Administrator`. This is an analysis model of roles; it does not require multiple class inheritance in the final programming language.",
+    "sourceHeading": "画UML",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "“Refactoring means frequently changing the code in order to change its external behavior”. Do you agree with this statement? Explain why",
+    "answer": "1. No.\n\n2. Refactoring is a reorganization technique that simplifies the design\n\n3. It Frequently reviews/changes code, without changing its external behavior\n\n4. Refactoring is intended to improve nonfunctional attributes of the software",
+    "sourceHeading": "“Refactoring means frequently changing the code in order to change its external behavior”. Do you agree with this statement? Explain why",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Which two fundamental design concepts are used to ensure less dependencies within the system? Explain your answers.",
+    "answer": "**Encapsulation：**\n\n- It Restricts direct access to some of an object's components. Information hiding\n\n- Bundling data with the methods that operate on that data. Implementations of abstract data types.\n\n**Modularity：**\n\n- It separates the functionality of a program into independent, interchangeable可替换的 modules.\n\n- Each module contains everything necessary to execute only one aspect of the desired functionality.\n\n- A module interface expresses the elements that are provided and required by the module.\n\n- The elements defined in the interface are detectable by other modules.\n\n**Summary：**\n\nEncapsulation & Modularity achieves low coupling（耦合） and high cohesion（内聚）, so that it can be used to ensure less dependencies within the system.",
+    "sourceHeading": "Which two fundamental design concepts are used to ensure less dependencies within the system? Explain your answers.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Define and discuss the concepts of cohesion and coupling, explaining what an optimal system should look like in terms of applying these concepts.",
+    "answer": "- **Coupling（耦合）:** The degree of dependency between subsystems, reflecting the strength and extent of their interconnections.\n\n- **Cohesion（内聚）:** The degree to which the elements within a module contribute to a single, well-defined responsibility; it describes functional relatedness rather than simply counting dependencies.\n\n- An optimal system should have low coupling and high cohesion.\n\n- Subsystem with as loosely as coupled to minimize the impacts of errors and future changes.\n\n- Subsystem with high cohesion means that all parts of the components should contribute to its logical function. If it is necessary to change the system, then everything to do with the component is encapsulated in one place.",
+    "sourceHeading": "Define and discuss the concepts of cohesion and coupling, explaining what an optimal system should look like in terms of applying these concepts.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A valid username has exactly six characters: the first three are letters and the last three are digits. Examples are `abc123` and `ghh558`. Design test cases using partition testing.",
+    "answer": "| Partition | Test input | Expected result |\n|---|---|---|\n| Valid lowercase letters and digits | `abc123` | Accept |\n| Valid uppercase letters and digits | `ABC789` | Accept |\n| Too short | `ab123` | Reject |\n| Too long | `abcd1234` | Reject |\n| Digit in the first three positions | `a1c123` | Reject |\n| Symbol in the first three positions | `ab_123` | Reject |\n| Letter in the final three positions | `abc12a` | Reject |\n| Symbol in the final three positions | `abc1#3` | Reject |\n\nChoose representatives from both valid and invalid equivalence classes, not only examples expected to pass.",
+    "sourceHeading": "Test Case Design密码",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A program accepts between 4 and 10 input values, inclusive. Identify the input-count partitions and choose representative and boundary test cases.",
+    "answer": "Partitions: fewer than 4 inputs (invalid), 4–10 inputs (valid), and more than 10 inputs (invalid).\n\nUse input counts **3, 4, 7, 10, 11**. Counts 4, 7 and 10 are accepted; 3 and 11 are rejected. Counts 4 and 10 are the valid boundaries, while 3 and 11 are immediately outside them.",
+    "sourceHeading": "Test Case Design分段画图",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "The full theatre ticket price is £100. Ages 6–25 receive a 20% discount; ages 26–64 pay full price; ages 65 and above receive a 10% discount. Children under 6 are not admitted. The component receives an integer age and returns a ticket price.\n\nDesign test cases using partition testing.",
+    "answer": "| Partition | Test ages | Expected result |\n|---|---|---|\n| Age 6–25 | 6, 17, 25 | £80 |\n| Age 26–64 | 26, 45, 64 | £100 |\n| Age 65+ | 65, 80 | £90 |\n| Under 6 | 0, 5 | Reject admission |\n| Invalid input | −1; non-numeric input at the input boundary | Validation error |\n\nThe adjacent values 5/6, 25/26 and 64/65 test changes at partition boundaries. The 65+ partition has no upper bound in the stated requirements.",
+    "sourceHeading": "Test Case Design分段",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A component classifies integer exam marks as A: 70–100, B: 60–69, C: 50–59, D: 45–49, E: 40–44 and F: 0–39. Describe how partition testing can test this component, including expected outputs.",
+    "answer": "| Partition | Test marks | Expected grade |\n|---|---|---|\n| 70–100 | 70, 85, 100 | A |\n| 60–69 | 60, 65, 69 | B |\n| 50–59 | 50, 55, 59 | C |\n| 45–49 | 45, 47, 49 | D |\n| 40–44 | 40, 42, 44 | E |\n| 0–39 | 0, 20, 39 | F |\n| Outside 0–100 | −5, 101 | Error |\n| Non-numeric input | `abc` at the input boundary | Error |\n\nEach valid partition has the same classification behavior. Use a middle value and boundaries; adjacent partitions supply tests on both sides of every threshold.",
+    "sourceHeading": "Test Case Design分段",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "The full theatre ticket price is £100. Ages 6–25 receive a 20% discount; ages 26–64 pay full price; ages 65 and above receive a 10% discount. Children under 6 are not admitted. The component receives an integer age and returns a ticket price.\n\nUse test-driven development: first write JUnit tests for the age partitions, then write the Java production code.",
+    "answer": "Write the tests first, observe them fail against an unimplemented method, implement the behavior, and rerun them.\n\n```java\nimport static org.junit.jupiter.api.Assertions.*;\nimport org.junit.jupiter.api.Test;\n\nclass TicketTest {\n    @Test\n    void testPrice() {\n        Ticket t = new Ticket(100);\n        for (int age : new int[]{6, 17, 25})\n            assertEquals(80.0, t.getPrice(age), 0.001);\n        for (int age : new int[]{26, 45, 64})\n            assertEquals(100.0, t.getPrice(age), 0.001);\n        for (int age : new int[]{65, 80})\n            assertEquals(90.0, t.getPrice(age), 0.001);\n        assertThrows(IllegalArgumentException.class, () -> t.getPrice(5));\n    }\n}\n```\n\n```java\nclass Ticket {\n    private final double fullPrice;\n    Ticket(double fullPrice) { this.fullPrice = fullPrice; }\n    double getPrice(int age) {\n        if (age < 6) throw new IllegalArgumentException(\"No admission\");\n        if (age <= 25) return fullPrice * 0.8;\n        if (age >= 65) return fullPrice * 0.9;\n        return fullPrice;\n    }\n}\n```",
+    "sourceHeading": "写production和test代码",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A fitness app calculates BMI as weight in kilograms divided by the square of height in metres. Write Java JUnit tests for (1) 75 kg, 1.8 m; and (2) 55 kg, 1.6 m. Use suitable expected values and a floating-point tolerance, then give a matching implementation.",
+    "answer": "The expected results are approximately **23.1** and **21.5**, respectively. Compare with a tolerance rather than exact floating-point equality.\n\n```java\nimport static org.junit.jupiter.api.Assertions.*;\nimport org.junit.jupiter.api.Test;\n\nclass BMITest {\n    @Test\n    void testCalculateBMI() {\n        assertEquals(23.1, new BMI(75, 1.8).calculate(), 0.1);\n        assertEquals(21.5, new BMI(55, 1.6).calculate(), 0.1);\n    }\n}\n\nclass BMI {\n    private final double weight;\n    private final double height;\n    BMI(double weight, double height) {\n        this.weight = weight;\n        this.height = height;\n    }\n    double calculate() { return weight / (height * height); }\n}\n```",
+    "sourceHeading": "写production和test代码",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "List five architectural constraints of RESTful architecture.",
+    "answer": "The five required constraints are:\n\n1. Client–server.\n2. Statelessness.\n3. Cacheability.\n4. Uniform interface.\n5. Layered system.\n\n**Code on demand** is the sixth, optional constraint.",
+    "sourceHeading": "List five most significant features of using RESTful architecture for development compared to other approaches.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "“Non-functional requirements are a result of the architectural choices.” Discuss an architectural choice for a web-based application that makes the system more robust to hardware failures.",
+    "answer": "Choose a distributed architecture with **redundant service instances and replicated data**, and use health checks, failover and load balancing to route work to healthy instances. If one machine fails, another can continue serving requests. The redundancy and failover behavior must be designed explicitly; merely distributing software does not automatically remove single points of failure.",
+    "sourceHeading": "List five most significant features of using RESTful architecture for development compared to other approaches.",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A web application must respect REST constraints. After login, the client still sends authentication information with every request. Which constraint does this behavior follow or violate, and why?",
+    "answer": "It follows **statelessness**: each request includes the information needed to understand and process it independently, rather than relying on server-side client session context from previous requests.\n\nAuthentication information can be a token; this does not require transmitting the username and password every time. Statelessness does not prohibit persistent application data such as stored user records.",
+    "sourceHeading": "List five most significant features of using RESTful architecture for development compared to other approaches.",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "“Architectural patterns can be seen as a way of reusing knowledge”. Do you agree with this statement? Explain why",
+    "answer": "1. I agree.\n\n2. Patterns are a means of representing, sharing and reusing knowledge.\n\n3. An architectural pattern is a stylized description of good design practice, which has been tried and tested in different environments.\n\n4. Patterns should include information about when they are and when they are not useful.\n\n5. Patterns may be represented using tabular and graphical descriptions.",
+    "sourceHeading": "“Architectural patterns can be seen as a way of reusing knowledge”. Do you agree with this statement? Explain why",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What is load balancing in the context of distributed systems and what is its aim?",
+    "answer": "1. Load balancing is the run-time technique of distributing client requests or computational work across multiple service instances or nodes.\n\n2. **Aim:**\n\n    - Prevent any single node from becoming overloaded.\n\n    - Improve performance and response time.\n\n    - Ensure high availability and fault tolerance.\n\n    - Enable scalability by adding more nodes.",
+    "sourceHeading": "What is load balancing in the context of distributed systems and what is its aim?",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Describe mobile applications architecture.",
+    "answer": "Mobile applications commonly use layers:\n\n- **Presentation layer:** the user interface and UI process components.\n- **Business layer:** the app's main functionality. Some of it may run on a remote backend to reduce load on the mobile device.\n- **Data layer:** data access components, helpers, utilities and service agents.\n\nIn a web-backed example, the browser/UI communicates with a web server, which invokes an application server; the application server accesses a database.",
+    "sourceHeading": "Describe Mobile applications architecture.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What is the business layer in the context of mobile applications architecture and how can it be used to reduce the computational load on the mobile?",
+    "answer": "**What：**\n\n1. It is a layer in the mobile application architecture. It is between Presentation layer and Data layer.\n\n2. It contains the main functionalities of the app.\n\n**How：**\n\n1. It can be deployed on a remote backend to reduce the load on the mobile.\n\n2. Offload heavy tasks (e.g., data processing, calculations) to the server.\n\n3. Send back only processed results, reducing computational load on the mobile.\n\n4. Allows the mobile app to stay lightweight and responsive.",
+    "sourceHeading": "What is the business layer in the context of mobile applications architecture and how can it be used to reduce the computational load on the mobile?",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What are the goals of a successful software project management? Explain.",
+    "answer": "- **Deliver on time**\n\n    develop and release the product by the agreed deadline.\n\n- **Stay within budget**\n\n    keep actual spending at or below the authorized cost baseline.\n\n- **Assure quality**\n\n    meet or exceed the required functionality, reliability and maintainability.\n\n- **Control risk and uncertainty**\n\n- **Use people and resources efficiently**\n\n- **Satisfy stakeholders**",
+    "sourceHeading": "What are the goals of a successful software project management? Explain.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "In project scheduling, we should not assume that every stage will be problem-free. Suggest scheduling rules to deal with unexpected problems.",
+    "answer": "The rule of thumb in these notes is:\n\n1. Estimate the schedule as if nothing will go wrong.\n2. Add 30% for anticipated problems.\n3. Add a further 20% to cover unanticipated problems.\n\nThe purpose is to include contingency instead of scheduling every activity on an assumption of flawless progress.",
+    "sourceHeading": "In project scheduling, we should not assume that every stage will be problem-free. Suggest scheduling rules to deal with unexpected problems.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What is Project scheduling process？",
+    "answer": "1. **Split project into separate tasks**\n\n    estimate time and resources required to complete each task.\n\n2. **Organize tasks concurrently**\n\n    to make optimal use of workforce.\n\n3. **Minimize task dependencies**\n\n    to avoid delays caused by one task waiting for another to complete.",
+    "sourceHeading": "What is Project scheduling process？",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "FlexiSoft is planning the FlexiVid Editor project. Activity durations are in weeks:\n\n| Activity | Description | Duration | Immediate predecessors |\n|---|---|---:|---|\n| A | Define requirements | 2 | None |\n| B | Assign team | 3 | None |\n| C | Select video codecs | 4 | A |\n| D | Code software | 3 | A, B |\n| E | Build software | 8 | C, D |\n| F | Test software | 3 | C |\n| G | Audit software | 2 | E |\n| H | Deploy software | 3 | F, G |\n\nDraw an activity-on-node network and calculate ES, EF, LS and LF for each activity, assuming the deadline is the earliest possible finish.",
+    "answer": "Network: Start → A, B; A → C, D; B → D; C → E, F; D → E; E → G; F, G → H; H → End.\n\nFor the forward pass, ES is the maximum predecessor EF and EF = ES + duration. For the backward pass, LF is the minimum successor LS and LS = LF − duration. Start at time 0 and finish at time 19.\n\n| Activity | ES | EF | LS | LF | Slack |\n|---|---:|---:|---:|---:|---:|\n| A | 0 | 2 | 0 | 2 | 0 |\n| B | 0 | 3 | 0 | 3 | 0 |\n| C | 2 | 6 | 2 | 6 | 0 |\n| D | 3 | 6 | 3 | 6 | 0 |\n| E | 6 | 14 | 6 | 14 | 0 |\n| F | 6 | 9 | 13 | 16 | 7 |\n| G | 14 | 16 | 14 | 16 | 0 |\n| H | 16 | 19 | 16 | 19 | 0 |",
+    "sourceHeading": "AON计算",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "FlexiSoft is planning the FlexiVid Editor project. Activity durations are in weeks:\n\n| Activity | Description | Duration | Immediate predecessors |\n|---|---|---:|---|\n| A | Define requirements | 2 | None |\n| B | Assign team | 3 | None |\n| C | Select video codecs | 4 | A |\n| D | Code software | 3 | A, B |\n| E | Build software | 8 | C, D |\n| F | Test software | 3 | C |\n| G | Audit software | 2 | E |\n| H | Deploy software | 3 | F, G |\n\nIdentify the critical path or paths and the planned project duration when the deadline is the earliest possible completion time.",
+    "answer": "There are **two critical paths**:\n\n- A → C → E → G → H: 2 + 4 + 8 + 2 + 3 = **19 weeks**.\n- B → D → E → G → H: 3 + 3 + 8 + 2 + 3 = **19 weeks**.\n\nThe earliest possible project completion time, and the assumed planned duration, is **19 weeks**. A separately imposed contractual deadline could be different.",
+    "sourceHeading": "AON计算",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "FlexiSoft is planning the FlexiVid Editor project. Activity durations are in weeks:\n\n| Activity | Description | Duration | Immediate predecessors |\n|---|---|---:|---|\n| A | Define requirements | 2 | None |\n| B | Assign team | 3 | None |\n| C | Select video codecs | 4 | A |\n| D | Code software | 3 | A, B |\n| E | Build software | 8 | C, D |\n| F | Test software | 3 | C |\n| G | Audit software | 2 | E |\n| H | Deploy software | 3 | F, G |\n\nFind the non-critical time (total float) of each activity and explain how much delay is available without extending the project.",
+    "answer": "Total float = LS − ES = LF − EF.\n\n| Activity | ES | EF | LS | LF | Slack |\n|---|---:|---:|---:|---:|---:|\n| A | 0 | 2 | 0 | 2 | 0 |\n| B | 0 | 3 | 0 | 3 | 0 |\n| C | 2 | 6 | 2 | 6 | 0 |\n| D | 3 | 6 | 3 | 6 | 0 |\n| E | 6 | 14 | 6 | 14 | 0 |\n| F | 6 | 9 | 13 | 16 | 7 |\n| G | 14 | 16 | 14 | 16 | 0 |\n| H | 16 | 19 | 16 | 19 | 0 |\n\nOnly **F** has nonzero float: **7 weeks**. It can start as late as week 13 and finish by week 16 without delaying H or the overall project. Every other activity has zero float. In general, floats of dependent activities cannot simply be added as independent project contingency; in this example F is the only non-critical activity.",
+    "sourceHeading": "AON计算",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A startup uses the following class, which currently supports debit-card payments. To support Alipay, a developer proposes editing the existing class and adding `processAlipayPayment()`. Explain which design principle this approach conflicts with and suggest an improved design.\n\n```java\nclass PaymentProcessor {\n    void processDebitCardPayment() {\n        // Process a debit-card payment.\n    }\n}\n```",
+    "answer": "It conflicts with the **Open–Closed Principle (OCP)**: a module should be open to extension and closed to modification. Repeatedly editing the processor for every new payment method makes extensions affect existing code.\n\nIntroduce a common interface and supply implementations:\n\n```java\ninterface PaymentMethod { void processPayment(); }\nclass DebitCardPayment implements PaymentMethod {\n    public void processPayment() { /* Debit-card processing */ }\n}\nclass AlipayPayment implements PaymentMethod {\n    public void processPayment() { /* Alipay processing */ }\n}\nclass PaymentProcessor {\n    void process(PaymentMethod paymentMethod) {\n        paymentMethod.processPayment();\n    }\n}\n```\n\nA new payment method can be added as another implementation without changing `PaymentProcessor`.",
+    "sourceHeading": "OCP题目",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "`Green` is a superclass of `Blue`. The contract of `Green.getColor()` promises “Green”, but `Blue.getColor()` produces “Blue”. With `Green green = new Blue();`, dynamic dispatch calls the `Blue` method. Which design principle is violated, and how could the model be corrected?",
+    "answer": "This violates the **Liskov Substitution Principle (LSP)** under the stated contract: a subtype must replace its supertype without breaking the behavior promised to clients.\n\nA possible redesign gives `Green` and `Blue` a common `Color` interface whose contract is to return the object's own color, rather than requiring `Blue` to be a subtype that promises “Green”. Overriding a method or returning a different value is not itself an LSP violation; the violation is breaking the inherited contract.",
+    "sourceHeading": "LSP题目",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "An important aspect of good-quality software is to reduce dependencies between different parts of a program. Explain what this means, why it matters, and how object-oriented programming supports it.",
+    "answer": "Reduce the extent to which one module relies on another module's concrete implementation details. This limits the impact of changes, makes parts easier to test and replace, and reduces maintenance difficulty.\n\nObject-oriented encapsulation hides implementation details behind interfaces. Under the **Dependency Inversion Principle (DIP)**:\n\n- High-level modules should not depend directly on low-level implementation details; both should depend on abstractions.\n- Abstractions should not depend on details; details should depend on abstractions.\n\nClients can use an interface while concrete implementations are supplied at a suitable composition point.",
+    "sourceHeading": "DIP题目",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "The high-level `OrderProcessor` directly constructs and depends on a concrete payment class:\n\n```java\nclass CreditCardPayment {\n    void processPayment(double amount) {\n        System.out.println(\"Processing credit-card payment: \" + amount);\n    }\n}\nclass OrderProcessor {\n    private CreditCardPayment paymentProcessor = new CreditCardPayment();\n    void checkout(double amount) { paymentProcessor.processPayment(amount); }\n}\n```\n\nExplain the dependency problem and refactor the design so different payment implementations can be supplied.",
+    "answer": "The high-level order logic depends on the concrete `CreditCardPayment` implementation. Introduce an abstraction and inject it:\n\n```java\ninterface PaymentProcessor {\n    void processPayment(double amount);\n}\nclass CreditCardPayment implements PaymentProcessor {\n    public void processPayment(double amount) {\n        System.out.println(\"Credit card: \" + amount);\n    }\n}\nclass PayPalPayment implements PaymentProcessor {\n    public void processPayment(double amount) {\n        System.out.println(\"PayPal: \" + amount);\n    }\n}\nclass OrderProcessor {\n    private final PaymentProcessor paymentProcessor;\n    OrderProcessor(PaymentProcessor paymentProcessor) {\n        this.paymentProcessor = paymentProcessor;\n    }\n    void checkout(double amount) { paymentProcessor.processPayment(amount); }\n}\n```\n\nFor example, construct `new OrderProcessor(new CreditCardPayment())` or supply a `PayPalPayment`. Both the high-level logic and low-level implementations now depend on the interface.",
+    "sourceHeading": "DIP的错误例子和修正",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "已有 Java 类 `OurGame`，构造函数为 `OurGame(Information inf)`，方法包括 `boolean move(Character c, Position p)`。`Account` 类提供 `boolean withdraw(int amount)`。\n\n要创建 `PayedGame`：构造时保存 `int cost` 和 `Account acc`；每次移动先执行 `acc.withdraw(cost)`，失败则返回 `false` 且不移动，成功后执行原有移动逻辑。其他行为应与 `OurGame` 相同。\n\n有人建议复制 `OurGame` 的全部代码，改名为 `PayedGame` 后修改。解释这种方式的问题，并给出更合适的实现思路。",
+    "answer": "复制代码违反 **DRY（Don't Repeat Yourself）**：同一逻辑存在多份表示，修改或修复时需要同步多处，容易不一致，也增加理解与维护成本。代码重复不必然降低运行效率。\n\n若 `PayedGame` 确实符合 `OurGame` 的行为契约，可以继承并仅扩展付费逻辑：\n\n```java\nclass PayedGame extends OurGame {\n    private final int cost;\n    private final Account acc;\n    PayedGame(Information inf, int cost, Account acc) {\n        super(inf);\n        this.cost = cost;\n        this.acc = acc;\n    }\n    @Override\n    public boolean move(Character c, Position p) {\n        if (!acc.withdraw(cost)) return false;\n        return super.move(c, p);\n    }\n}\n```\n\n这里遵循题设的“先扣费，再尝试移动”顺序。不存在合适的继承关系时，也可以通过组合复用原有游戏逻辑。",
+    "sourceHeading": "DRY题目",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Design Pattern 有哪些？它们各自的作用是什么？",
+    "answer": "- **Wrapper**：用包装对象保留原接口，并在调用周围增加处理。\n- **Decorator**：动态地给对象添加行为，避免为每种功能组合建立子类。\n- **Adapter**：转换不兼容的接口，使对象能通过调用方期望的接口工作。\n- **Composite**：统一对待单个对象和对象组合。\n- **Observer**：一个对象状态变化时通知依赖它的多个对象。\n- **Strategy**：封装可互换的算法，使它们可以动态切换。\n- **Factory Method**：定义创建操作，由子类决定具体产品类型。\n- **Singleton**：控制某个类只有一个实例。\n- **Proxy**：用替身控制对实际对象的访问。\n- **Command**：把请求封装为对象，便于参数化、排队等操作。",
+    "sourceHeading": "Design Pattern有哪些？作用是什么？",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "You need a modified version of an existing object without changing the original class. It should behave somewhat differently while still being usable through the same interface. Explain how the Decorator design pattern works, how its result differs from a subclass, and when it is preferable to inheritance.",
+    "answer": "A decorator is a wrapper that implements the same interface as the wrapped object. It stores a reference of that interface type, normally supplied through its constructor. Each method delegates to the corresponding method of the wrapped object and adds work before or after the call.\n\n- **Inheritance** creates a subtype and changes behavior through overriding.\n- **Decoration** composes objects and adds behavior dynamically to a particular object.\n- Decorators are useful when optional features must be combined flexibly. Multiple wrappers can be combined without creating a subclass for every feature combination.",
+    "sourceHeading": "Decorator题目",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nclass Database {\n    private static Database instance;\n    private Database() {}\n    public static Database getInstance() {\n        if (instance == null) instance = new Database();\n        return instance;\n    }\n}\n```",
+    "answer": "**Singleton.** The constructor is private and access is through a shared static instance. A printer background-management service is an example. This simple lazy initialization shows the pattern but is not thread-safe without additional synchronization or another safe initialization technique.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nabstract class Product { abstract void use(); }\nclass ConcreteProductA extends Product {\n    void use() { System.out.println(\"Using Product A\"); }\n}\nclass Factory {\n    public static Product createProduct(String type) {\n        if (type.equals(\"A\")) return new ConcreteProductA();\n        throw new IllegalArgumentException(\"Unknown type\");\n    }\n}\n```",
+    "answer": "**Simple Factory（简单工厂）**, implemented by a static factory method with a selection branch. The caller requests a product without constructing the concrete class directly. For example, an account-opening service can create a savings account or credit-card account according to a selection.\n\nThis is not the GoF Factory Method pattern: that pattern lets subclasses override a creation operation to select the concrete product.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nclass OldSystem {\n    void legacyMethod() { System.out.println(\"Old system method\"); }\n}\ninterface NewSystem { void newMethod(); }\nclass Adapter implements NewSystem {\n    private final OldSystem oldSystem;\n    Adapter(OldSystem oldSystem) { this.oldSystem = oldSystem; }\n    public void newMethod() { oldSystem.legacyMethod(); }\n}\n```",
+    "answer": "**Adapter.** It exposes the expected `NewSystem` interface and translates calls to `OldSystem.legacyMethod()`, allowing incompatible interfaces to work together. A laptop power adapter is a real-world analogy.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\ninterface Coffee {\n    String getDescription();\n    double cost();\n}\nclass BasicCoffee implements Coffee {\n    public String getDescription() { return \"Basic Coffee\"; }\n    public double cost() { return 2.00; }\n}\nclass MilkDecorator implements Coffee {\n    private final Coffee coffee;\n    MilkDecorator(Coffee coffee) { this.coffee = coffee; }\n    public String getDescription() { return coffee.getDescription() + \", Milk\"; }\n    public double cost() { return coffee.cost() + 0.50; }\n}\n```",
+    "answer": "**Decorator.** The wrapper implements the same interface, delegates to the wrapped object and adds description/cost without changing its class. Building a milk-tea drink by adding optional ingredients is an example.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nimport java.util.*;\ninterface Component { void showDetails(); }\nclass Leaf implements Component {\n    private final String name;\n    Leaf(String name) { this.name = name; }\n    public void showDetails() { System.out.println(name); }\n}\nclass Composite implements Component {\n    private final List<Component> children = new ArrayList<>();\n    void add(Component child) { children.add(child); }\n    public void showDetails() {\n        for (Component child : children) child.showDetails();\n    }\n}\n```",
+    "answer": "**Composite.** A leaf and a group share the same `Component` interface. A group contains components and delegates an operation to its children. Files and directories in a filesystem are an example of treating individual objects and groups uniformly.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nimport java.util.*;\ninterface Observer { void update(String message); }\nclass ConcreteObserver implements Observer {\n    private final String name;\n    ConcreteObserver(String name) { this.name = name; }\n    public void update(String message) {\n        System.out.println(name + \" received update: \" + message);\n    }\n}\nclass Subject {\n    private final List<Observer> observers = new ArrayList<>();\n    void addObserver(Observer observer) { observers.add(observer); }\n    void notifyObservers(String message) {\n        for (Observer observer : observers) observer.update(message);\n    }\n}\n```",
+    "answer": "**Observer.** The subject maintains registered observers and notifies them through a shared interface. A WeChat public account sending updates to its subscribers is an example.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\ninterface PaymentStrategy { void pay(int amount); }\nclass CreditCardPayment implements PaymentStrategy {\n    public void pay(int amount) { System.out.println(\"Credit card: \" + amount); }\n}\nclass PayPalPayment implements PaymentStrategy {\n    public void pay(int amount) { System.out.println(\"PayPal: \" + amount); }\n}\nclass ShoppingCart {\n    private PaymentStrategy strategy;\n    void setPaymentStrategy(PaymentStrategy strategy) { this.strategy = strategy; }\n    void checkout(int amount) { strategy.pay(amount); }\n}\n```",
+    "answer": "**Strategy.** Payment algorithms implement a common interface; the cart can replace its strategy without changing checkout logic. Choosing between payment methods during online shopping is an example.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\ninterface Image { void display(); }\nclass RealImage implements Image {\n    private final String filename;\n    RealImage(String filename) {\n        this.filename = filename;\n        System.out.println(\"Loading image: \" + filename);\n    }\n    public void display() { System.out.println(\"Displaying: \" + filename); }\n}\nclass ProxyImage implements Image {\n    private RealImage realImage;\n    private final String filename;\n    ProxyImage(String filename) { this.filename = filename; }\n    public void display() {\n        if (realImage == null) realImage = new RealImage(filename);\n        realImage.display();\n    }\n}\n```",
+    "answer": "**Proxy**, specifically a virtual proxy for lazy loading. `ProxyImage` has the same interface but delays creation of `RealImage` until display is requested. An image preview loader is an example; unused images need not consume loading resources.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\ninterface Command { void execute(); }\nclass Light {\n    void turnOn() { System.out.println(\"Light is ON\"); }\n}\nclass LightOnCommand implements Command {\n    private final Light light;\n    LightOnCommand(Light light) { this.light = light; }\n    public void execute() { light.turnOn(); }\n}\nclass RemoteControl {\n    private Command command;\n    void setCommand(Command command) { this.command = command; }\n    void pressButton() { command.execute(); }\n}\n```",
+    "answer": "**Command.** The request to switch on the light is encapsulated as an object. The remote control invokes a generic command without needing the receiver's implementation details. Smart-home remote-control actions are an example; command objects can also be queued or parameterized.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Identify the design pattern or creation idiom in this Java example, explain the identifying feature, and give a real-world example.\n\n```java\nclass Logger {\n    private static Logger instance;\n    private Logger() {}\n    public static Logger getInstance() {\n        if (instance == null) instance = new Logger();\n        return instance;\n    }\n    void log(String message) { System.out.println(\"Log: \" + message); }\n}\nclass LoggerFactory {\n    public static Logger createLogger() { return Logger.getInstance(); }\n}\n```",
+    "answer": "The example combines a **Singleton** logger with a **factory-style access method**. `Logger.getInstance()` returns the shared logger; `LoggerFactory.createLogger()` hides how that object is obtained. A system logger is the example. The static factory wrapper is not by itself the GoF Factory Method pattern, and the shown lazy singleton needs a safe initialization approach if used concurrently.",
+    "sourceHeading": "判断题",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Define open source and open-source software (OSS) and give one example of OSS.",
+    "answer": "1. Open source means that source code is available under a licence permitting use, study, modification and redistribution; public visibility alone is not enough.\n\n2. OSS is not necessarily free of charge, and users must still comply with its licence conditions. See the [Open Source Definition](https://opensource.org/osd).\n\n3. **Python、Eclipse、Linux**",
+    "sourceHeading": "Define open source and open-source software (OSS) and give one example of OSS.",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A technology company needs software to manage graduate recruitment and an associated management-training programme. Briefly describe the business risks of (i) developing it in-house, (ii) buying it from a proprietary supplier, and (iii) using an open-source product.",
+    "answer": "1. **In-house development:** development and ongoing maintenance can be expensive; the company must maintain technical expertise and adapt the system as requirements change.\n2. **Proprietary supplier:** the company may depend on one supplier for fixes and extensions because it lacks control over the source code. This creates lock-in, pricing and supplier-continuity risks.\n3. **Open source:** source access and alternative service providers can reduce single-supplier dependence. However, the company still needs expertise, maintenance resources, licence compliance and a plan for project or supplier continuity. Open source does not eliminate costs or operational risk.",
+    "sourceHeading": "使用开源还是自己研发？",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "A company decides to develop its graduate-recruitment and management-training software in-house to match its requirements. Name important software quality attributes and explain whether all of them can be included or maximized in the product.",
+    "answer": "Important attributes include functionality, reliability, usability, performance, scalability, security, maintainability, compatibility, interoperability and flexibility. Clear documentation, robust error handling and feedback mechanisms also support software quality.\n\nThe product can set objectives for many attributes, but it is rarely possible to **maximize every attribute simultaneously** within limited time and cost. Some goals trade off against others—for example, stronger security checks may affect convenience or performance. Prioritize measurable targets based on stakeholder needs rather than treating “good quality” as one unqualified property.",
+    "sourceHeading": "What is a good software？",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "How might a version control system help the company manage the quality of the software that is being implemented?",
+    "answer": "- A Revision Control keeps a record of all the changes that are made to the software of a project.\n\n- It will generally incorporate roll-back features, enabling a return to any previous version of the system.\n\n- A check-out is when a developer obtains the current version of a file, to have a local copy to work with.\n\n- A check-in (or “commit”) is when a developer enters a modified version of the file into the system to become the current version (“master copy”) of that file for the system.\n\n- A conflict is when two different developers are trying to make incompatible changes to the same file.\n\n- A merge is an attempt to put together separate changes made by two or more developers.\n\n- Conflicts could be avoided by allowing only one developer to work on any one file at one time (“locking” the file), but this is not always practical or efficient in large scale systems.",
+    "sourceHeading": "How might a version control system help the company manage the quality of the software that is being implemented?",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Briefly describe the concept of disparate impact, and explain whether this is justified when developing fair software or products. Give one example to illustrate your answer.",
+    "answer": "Disparate impact occurs when an apparently neutral policy or system produces disproportionately adverse outcomes for a particular group. An unjustified adverse impact conflicts with the aim of fair software. Applying the same rule to everyone does not by itself establish fairness; the resulting impact must also be examined.\n\nFor example, a recruitment model trained on historically biased hiring data may favor male applicants even if it does not explicitly use gender as a decision rule. The apparently neutral process can therefore reproduce an unfair outcome.",
+    "sourceHeading": "Ethics",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Users receive app notifications only on their mobile devices, not on the desktop version. Some users believe this is a bug; others think it is intentional to reduce distractions at work. Is it a bug or a feature? Explain how to decide.",
+    "answer": "It depends on the agreed requirements. If notifications are deliberately restricted to mobile devices to reduce desktop distractions, it is a feature. If desktop notifications are required but missing, it is a bug. The observed behavior alone does not establish the intended requirement; check the specification, acceptance criteria or product decision.",
+    "sourceHeading": "Bugs or features",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "What tools can you use to debug a Java program?",
+    "answer": "Use an IDE debugger (breakpoints, stepping and variable inspection), diagnostic print statements, and logging. These help trace execution and compare actual state with expected behavior.",
+    "sourceHeading": "What tools can you use to debug?",
+    "type": "concept"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "This Java method should calculate the average of an array. Identify and fix its issues. What should it return for `{10, 20, 30, 40, 50}`?\n\n```java\nstatic double calculateAverage(int[] nums) {\n    int sum = 0;\n    for (int i = 0; i <= nums.length; i++) {\n        sum += nums[i];\n    }\n    return (double) sum / nums.length;\n}\n```",
+    "answer": "- Change the loop boundary to `i < nums.length`; `nums[nums.length]` is out of bounds.\n- Reject a null or empty array before accessing it or calculating an average.\n- Cast before division. The original `(double) sum / nums.length` already does this correctly; it is not an integer-division bug.\n- A `long` accumulator also avoids overflow when summing multiple `int` values.\n\n```java\nstatic double calculateAverage(int[] nums) {\n    if (nums == null || nums.length == 0)\n        throw new IllegalArgumentException(\"Array cannot be null or empty\");\n    long sum = 0;\n    for (int i = 0; i < nums.length; i++) sum += nums[i];\n    return (double) sum / nums.length;\n}\n```\n\nFor the supplied array, the sum is 150 and the average is **30.0**.",
+    "sourceHeading": "This program should calculate the average of an array of numbers, but it contains several issues.",
+    "type": "application"
+  },
+  {
+    "course": "Software Engineering",
+    "prompt": "Find and fix the bugs in this Java method for finding an array's maximum value. Consider null, empty and all-negative arrays as well as `{15, 42, 7, 63, 21}`.\n\n```java\nstatic int findMaxValue(int[] nums) {\n    int max = 0;\n    for (int i = 1; i <= nums.length; i++) {\n        if (nums[i] > max) max = nums[i];\n    }\n    return max;\n}\n```",
+    "answer": "- Reject null or empty input before reading its first element.\n- Initialize `max` to `nums[0]`, not 0; otherwise all-negative arrays can incorrectly return 0, and the first element is not properly included.\n- Use `i < nums.length` to avoid an out-of-bounds access.\n\n```java\nstatic int findMaxValue(int[] nums) {\n    if (nums == null || nums.length == 0)\n        throw new IllegalArgumentException(\"Array cannot be null or empty\");\n    int max = nums[0];\n    for (int i = 1; i < nums.length; i++) {\n        if (nums[i] > max) max = nums[i];\n    }\n    return max;\n}\n```\n\nThe maximum of the supplied example is **63**. For an all-negative array, the method correctly returns its least-negative element.",
+    "sourceHeading": "Find the maximum number in an array.",
+    "type": "application"
+  }
+]
