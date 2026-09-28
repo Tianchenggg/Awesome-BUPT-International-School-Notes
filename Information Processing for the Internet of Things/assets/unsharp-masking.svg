@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="492.48pt" height="420.198281pt" viewBox="0 0 492.48 420.198281" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-28T16:34:28.832337</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.9.4, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 420.198281 
+L 492.48 420.198281 
+L 492.48 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 7.2 98.718281 
+L 485.28 98.718281 
+L 485.28 21.558281 
+L 7.2 21.558281 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1"/>
+   <g id="matplotlib.axis_2"/>
+   <g id="line2d_1">
+    <path d="M 28.930909 95.211009 
+L 195.534545 95.211009 
+L 296.945455 25.065554 
+L 463.549091 25.065554 
+L 463.549091 25.065554 
+" clip-path="url(#pff05d5706d)" style="fill: none; stroke: #346796; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 7.2 95.211009 
+L 485.28 95.211009 
+" clip-path="url(#pff05d5706d)" style="fill: none; stroke: #9ca4ae; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 7.2 98.718281 
+L 7.2 21.558281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 7.2 98.718281 
+L 485.28 98.718281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_1">
+    <text style="font: 11px 'DejaVu Sans'; text-anchor: start" x="7.2" y="15.558281" transform="rotate(-0 7.2 15.558281)">Original signal</text>
+   </g>
+  </g>
+  <g id="axes_2">
+   <g id="patch_5">
+    <path d="M 7.2 203.478281 
+L 485.28 203.478281 
+L 485.28 126.318281 
+L 7.2 126.318281 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_3"/>
+   <g id="matplotlib.axis_4"/>
+   <g id="line2d_3">
+    <path d="M 28.930909 199.971009 
+L 160.765091 199.869407 
+L 169.457455 199.619304 
+L 175.252364 199.249822 
+L 180.322909 198.708026 
+L 184.669091 198.025087 
+L 189.015273 197.096268 
+L 192.637091 196.11065 
+L 196.258909 194.920375 
+L 199.880727 193.522778 
+L 204.226909 191.581257 
+L 208.573091 189.376132 
+L 213.643636 186.52112 
+L 219.438545 182.971714 
+L 226.682182 178.251623 
+L 238.272 170.383644 
+L 267.970909 150.104895 
+L 275.214545 145.464192 
+L 281.009455 142.018629 
+L 286.08 139.28706 
+L 290.426182 137.209645 
+L 294.772364 135.410499 
+L 298.394182 134.137115 
+L 302.016 133.070518 
+L 305.637818 132.202838 
+L 309.984 131.401729 
+L 314.330182 130.826448 
+L 319.400727 130.381984 
+L 325.92 130.063337 
+L 334.612364 129.889692 
+L 351.997091 129.827859 
+L 463.549091 129.825554 
+L 463.549091 129.825554 
+" clip-path="url(#p326108179d)" style="fill: none; stroke: #346796; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 7.2 199.971009 
+L 485.28 199.971009 
+" clip-path="url(#p326108179d)" style="fill: none; stroke: #9ca4ae; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 7.2 203.478281 
+L 7.2 126.318281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 7.2 203.478281 
+L 485.28 203.478281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_2">
+    <text style="font: 11px 'DejaVu Sans'; text-anchor: start" x="7.2" y="120.318281" transform="rotate(-0 7.2 120.318281)">Blurred signal</text>
+   </g>
+  </g>
+  <g id="axes_3">
+   <g id="patch_8">
+    <path d="M 7.2 308.238281 
+L 485.28 308.238281 
+L 485.28 231.078281 
+L 7.2 231.078281 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_5"/>
+   <g id="matplotlib.axis_6"/>
+   <g id="line2d_5">
+    <path d="M 28.930909 269.658281 
+L 149.175273 269.759897 
+L 155.694545 269.985245 
+L 160.040727 270.322049 
+L 163.662545 270.808012 
+L 166.56 271.397185 
+L 169.457455 272.230295 
+L 171.630545 273.058886 
+L 173.803636 274.100694 
+L 175.976727 275.393638 
+L 178.149818 276.977805 
+L 180.322909 278.894458 
+L 182.496 281.184832 
+L 184.669091 283.888782 
+L 186.842182 287.043331 
+L 189.015273 290.681224 
+L 191.188364 294.829565 
+L 193.361455 299.508641 
+L 195.534545 304.731009 
+L 197.707636 299.508641 
+L 199.880727 294.829565 
+L 202.053818 290.681224 
+L 204.226909 287.043331 
+L 206.4 283.888782 
+L 208.573091 281.184832 
+L 210.746182 278.894458 
+L 212.919273 276.977805 
+L 215.092364 275.393638 
+L 217.265455 274.100694 
+L 219.438545 273.058886 
+L 221.611636 272.230295 
+L 224.509091 271.397185 
+L 227.406545 270.807887 
+L 231.028364 270.321262 
+L 235.374545 269.98197 
+L 241.893818 269.743039 
+L 257.829818 269.291616 
+L 262.176 268.915856 
+L 265.797818 268.38063 
+L 268.695273 267.736635 
+L 271.592727 266.831534 
+L 273.765818 265.935917 
+L 275.938909 264.814735 
+L 278.112 263.429251 
+L 280.285091 261.738865 
+L 282.458182 259.702182 
+L 284.631273 257.278267 
+L 286.804364 254.42805 
+L 288.977455 251.115773 
+L 291.150545 247.310427 
+L 293.323636 242.987062 
+L 295.496727 238.127882 
+L 296.945455 234.585554 
+L 299.118545 239.807921 
+L 301.291636 244.486997 
+L 303.464727 248.635339 
+L 305.637818 252.273232 
+L 307.810909 255.427781 
+L 309.984 258.131731 
+L 312.157091 260.422105 
+L 314.330182 262.338757 
+L 316.503273 263.922925 
+L 318.676364 265.215869 
+L 320.849455 266.257677 
+L 323.022545 267.086267 
+L 325.92 267.919378 
+L 328.817455 268.508551 
+L 332.439273 268.994514 
+L 336.785455 269.331318 
+L 342.580364 269.541796 
+L 352.721455 269.643999 
+L 393.285818 269.658281 
+L 463.549091 269.658281 
+L 463.549091 269.658281 
+" clip-path="url(#pea2e238dfb)" style="fill: none; stroke: #346796; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_6">
+    <path d="M 7.2 269.658281 
+L 485.28 269.658281 
+" clip-path="url(#pea2e238dfb)" style="fill: none; stroke: #9ca4ae; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 7.2 308.238281 
+L 7.2 231.078281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 7.2 308.238281 
+L 485.28 308.238281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_3">
+    <text style="font: 11px 'DejaVu Sans'; text-anchor: start" x="7.2" y="225.078281" transform="rotate(-0 7.2 225.078281)">Unsharp mask = original − blurred</text>
+   </g>
+  </g>
+  <g id="axes_4">
+   <g id="patch_11">
+    <path d="M 7.2 412.998281 
+L 485.28 412.998281 
+L 485.28 335.838281 
+L 7.2 335.838281 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_7"/>
+   <g id="matplotlib.axis_8"/>
+   <g id="line2d_7">
+    <path d="M 28.930909 405.271981 
+L 161.489455 405.371885 
+L 170.181818 405.612021 
+L 176.701091 406.021294 
+L 181.771636 406.561417 
+L 186.117818 407.230524 
+L 190.464 408.126596 
+L 194.810182 409.274288 
+L 195.534545 409.491009 
+L 199.880727 405.655325 
+L 204.951273 401.500551 
+L 210.021818 397.654294 
+L 215.816727 393.564934 
+L 222.336 389.24473 
+L 231.752727 383.304726 
+L 251.310545 371.320617 
+L 267.246545 361.447012 
+L 275.214545 356.253201 
+L 281.009455 352.232011 
+L 286.08 348.464249 
+L 291.150545 344.402413 
+L 295.496727 340.653208 
+L 296.945455 339.345554 
+L 301.291636 340.536635 
+L 305.637818 341.47327 
+L 309.984 342.17801 
+L 315.054545 342.751808 
+L 320.849455 343.15551 
+L 328.093091 343.41088 
+L 338.958545 343.537545 
+L 369.381818 343.564581 
+L 463.549091 343.564581 
+L 463.549091 343.564581 
+" clip-path="url(#p6cacc5a84b)" style="fill: none; stroke: #346796; stroke-width: 2; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_8">
+    <path d="M 7.2 405.271981 
+L 485.28 405.271981 
+" clip-path="url(#p6cacc5a84b)" style="fill: none; stroke: #9ca4ae; stroke-width: 0.7; stroke-linecap: square"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 7.2 412.998281 
+L 7.2 335.838281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 7.2 412.998281 
+L 485.28 412.998281 
+" style="fill: none; stroke: #000000; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_4">
+    <text style="font: 11px 'DejaVu Sans'; text-anchor: start" x="7.2" y="329.838281" transform="rotate(-0 7.2 329.838281)">Sharpened signal = original + mask</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pff05d5706d">
+   <rect x="7.2" y="21.558281" width="478.08" height="77.16"/>
+  </clipPath>
+  <clipPath id="p326108179d">
+   <rect x="7.2" y="126.318281" width="478.08" height="77.16"/>
+  </clipPath>
+  <clipPath id="pea2e238dfb">
+   <rect x="7.2" y="231.078281" width="478.08" height="77.16"/>
+  </clipPath>
+  <clipPath id="p6cacc5a84b">
+   <rect x="7.2" y="335.838281" width="478.08" height="77.16"/>
+  </clipPath>
+ </defs>
+</svg>
