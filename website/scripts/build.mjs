@@ -13,24 +13,25 @@ const source=process.env.NOTES_ROOT || (await fs.stat(path.join(parent,'Cloud Co
 const out=path.join(root,'dist');
 await fs.mkdir(out,{recursive:true});
 for(const d of ['data','media','vendor']) await fs.mkdir(path.join(out,d),{recursive:true});
+const chapterLabels=JSON.parse(await fs.readFile(path.join(root,'content/chapter-labels-en.json'),'utf8'));
 const metadata=[
- ['Cloud Computing','CC','Systems','云计算架构、虚拟化与分布式系统'],
- ['Communications and Networks','CN','Networks','网络协议、传输机制与通信原理'],
- ['Cryptography and Network Security','CS','Networks','密码算法、身份认证与网络安全'],
- ['Digital Circuit Design','DC','Hardware','组合逻辑、时序电路与状态机'],
- ['Discrete Mathematics','DM','Mathematics','逻辑、集合、关系与图论'],
- ['Embedded Systems','ES','Hardware','处理器、嵌入式开发与实时系统'],
- ['Information Processing for the Internet of Things','IP','Intelligence','数据挖掘、信息检索与图像处理'],
- ['Java Programming','JP','Software','Java 语言、面向对象与程序设计'],
- ['Machine Learning','ML','Intelligence','学习算法、模型评估与计算例题'],
- ['Middleware','MW','Systems','中间件、通信、并发与服务'],
- ['Operating Systems','OS','Systems','进程调度、内存管理与线程同步'],
- ['Probability and Stochastic Processes','PS','Mathematics','随机变量、概率分布与随机过程'],
- ['RFID','RF','Hardware','射频识别、编码与通信协议'],
- ['Signals and Systems','SS','Mathematics','信号分析、系统变换与采样'],
- ['Smart Infrastructure','SI','Intelligence','智慧基础设施、数据处理与分析'],
- ['Software Engineering','SE','Software','软件过程、需求、设计与建模题目'],
- ['毛概','政','Humanities','理论知识点与课程复习提纲'],
+ ['Cloud Computing','CC','Systems','Cloud architectures, virtualization and distributed systems'],
+ ['Communications and Networks','CN','Networks','Network protocols, transmission mechanisms and communication principles'],
+ ['Cryptography and Network Security','CS','Networks','Cryptographic algorithms, authentication and network security'],
+ ['Digital Circuit Design','DC','Hardware','Combinational logic, sequential circuits and state machines'],
+ ['Discrete Mathematics','DM','Mathematics','Logic, sets, relations and graph theory'],
+ ['Embedded Systems','ES','Hardware','Processors, embedded development and real-time systems'],
+ ['Information Processing for the Internet of Things','IP','Intelligence','Data mining, information retrieval and image processing'],
+ ['Java Programming','JP','Software','Java, object-oriented programming and program design'],
+ ['Machine Learning','ML','Intelligence','Learning algorithms, model evaluation and worked examples'],
+ ['Middleware','MW','Systems','Middleware, communication, concurrency and services'],
+ ['Operating Systems','OS','Systems','Process scheduling, memory management and thread synchronization'],
+ ['Probability and Stochastic Processes','PS','Mathematics','Random variables, probability distributions and stochastic processes'],
+ ['RFID','RF','Hardware','Radio-frequency identification, coding and communication protocols'],
+ ['Signals and Systems','SS','Mathematics','Signal analysis, system transforms and sampling'],
+ ['Smart Infrastructure','SI','Intelligence','Smart infrastructure, data processing and analysis'],
+ ['Software Engineering','SE','Software','Software processes, requirements, design and modeling exercises'],
+ ['毛概','政','Humanities','Core theories and course revision outlines'],
 ];
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const mediaMap=new Map();let mathCount=0;const formulaErrors=[];
@@ -58,7 +59,7 @@ async function html(md,course,quiz=false){
   localImages.set(url,`media/${name}`);
  }
  const renderer=new Renderer();
- renderer.image=({href,text})=>`<img loading="lazy" src="${esc(localImages.get(href)||href)}" alt="${esc(text||'课程插图')}">`;
+ renderer.image=({href,text})=>`<img loading="lazy" src="${esc(localImages.get(href)||href)}" alt="${esc(text||'Course illustration')}">`;
  renderer.code=({text,lang})=>lang==='mermaid'?`<pre class="mermaid" data-mermaid="true">${esc(text)}</pre>`:`<pre><code class="language-${esc(lang||'text')}">${esc(text)}</code></pre>`;
  let result=marked.parse(md,{gfm:true,renderer});
  result=result.replace(/<span data-bupt-math="(\d+)"><\/span>/g,(_,i)=>replacements[+i]);
@@ -85,7 +86,7 @@ for(const [name,short,category,description] of metadata){
  const raw=await fs.readFile(path.join(source,name,file),'utf8');
  const id=name==='毛概'?'mao-gai':name.toLowerCase().replaceAll(' ','-');
  const chunks=sections(raw);const chapters=[];
- for(const [i,section] of chunks.entries())chapters.push({id:`section-${i+1}`,title:section.title,html:await html(section.body.join('\n'),name),minutes:Math.max(1,Math.round(section.body.join('\n').length/900))});
+ for(const [i,section] of chunks.entries())chapters.push({id:`section-${i+1}`,title:section.title,displayTitle:chapterLabels[id]?.[`section-${i+1}`]||section.title,html:await html(section.body.join('\n'),name),minutes:Math.max(1,Math.round(section.body.join('\n').length/900))});
  const quiz=[];
  for(const [i,q] of questions.filter(q=>q.course===name).entries()){
   const match=q.sourceLine?chunks.findIndex(s=>q.sourceLine>=s.startLine&&q.sourceLine<=s.endLine):chunks.findIndex(s=>s.title===q.sourceHeading||s.body.some(l=>l.replace(/^#+\s*/,'').replace(/<span[^>]*><\/span>/g,'').trim()===q.sourceHeading));
@@ -100,7 +101,7 @@ for(const [name,short,category,description] of metadata){
   const sourceAnchor=sourceHeadingLine>chunks[match].startLine?`source-line-${sourceHeadingLine}`:null;
   quiz.push({...q,id:questionId,sourceAnchor,promptHtml:await html(q.prompt,name,true),answerHtml:await html(q.answer,name,true),sectionId:chapters[match].id});
  }
- const course={id,name,short,category,description,sourceFile:`${name}/${file}`,chapters,questions:quiz};
+ const course={id,name:name==='毛概'?'Mao Zedong Thought and Socialism with Chinese Characteristics':name,short:name==='毛概'?'MT':short,category,description,sourceFile:`${name}/${file}`,chapters,questions:quiz};
  await fs.writeFile(path.join(out,'data',id+'.json'),JSON.stringify(course));
  index.push({...course,chapters:chapters.length,questions:quiz.length});
 }
