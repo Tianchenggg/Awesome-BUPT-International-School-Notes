@@ -2,4 +2,6 @@ node_modules/
 dist/
 .sites-runtime/
 .openai/
+.wrangler/
+.dev.vars
 .DS_Store

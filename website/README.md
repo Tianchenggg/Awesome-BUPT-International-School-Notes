@@ -9,7 +9,9 @@
 - 章节、知识点与独立问题统一使用阿拉伯数字分层编号；自测卡片直接显示题干。
 - Markdown、公式、表格、插图和 Mermaid 图示全部在网站内部显示。
 - 参考答案默认隐藏，支持按章节练习、作答草稿、自评、待复习筛选、打乱顺序和本轮总结。
-- 阅读进度、草稿和掌握情况仅保存在当前浏览器，不需要注册登录。
+- 阅读进度、作答草稿和掌握情况保存在当前浏览器，不需要注册登录。
+- **Student forum**：无需账号，按课程公开提问、求笔记、回复和分享链接；显示名可选。帖子与回复持久保存到共享 D1 数据库，所有访客都能读取。
+- 发帖浏览器持有匿名管理密钥，可以移除自己的消息；清除浏览器数据后将失去该管理权限。
 
 ## 本地运行
 
@@ -23,7 +25,14 @@ npm run dev
 
 打开 `http://127.0.0.1:4173`。修改 `src` 或笔记后重新运行 `npm run build` 并刷新浏览器。
 
-也可通过 `NOTES_ROOT=/absolute/path/to/notes-repository npm run build` 指定笔记仓库位置。构建读取各课程 Markdown 和配图，生成可独立部署的 `dist/`。数学和 Markdown 在构建时转换，浏览器按课程加载内容。
+也可通过 `NOTES_ROOT=/absolute/path/to/notes-repository npm run build` 指定笔记仓库位置。构建读取各课程 Markdown 和配图，生成 `dist/client` 静态资源与 `dist/server` Worker。数学和 Markdown 在构建时转换，浏览器按课程加载内容。论坛需要 Cloudflare Workers 的 `ASSETS` 和 D1 `DB` 绑定，不能仅用静态文件服务器部署。`npm run dev` 自动向本地 D1 应用 `drizzle` 迁移；本地论坛数据保存在忽略的 `.wrangler/` 目录，不上传到公开网站。
+
+## 论坛维护
+
+- 页面与表单：`src/forum.js`；公开接口：`server/index.js`。
+- 数据表定义：`db/schema.ts`。修改后运行 `npm run db:generate`，检查生成的 SQL；已发布的迁移保持不变，后续追加迁移。
+- `npm run build && npm run test:forum` 验证匿名访问、重复提交、权限、限流和移除后保留其他人的回复。
+- 发帖使用纯文本与安全外链，服务端限制长度和发帖频率；不收集邮箱或密码。
 
 ## 内容维护
 

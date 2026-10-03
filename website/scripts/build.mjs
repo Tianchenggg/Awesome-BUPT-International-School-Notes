@@ -10,7 +10,8 @@ marked.use({extensions:[{name:'strongCompat',level:'inline',start(src){return sr
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const parent=path.resolve(root,'..');
 const source=process.env.NOTES_ROOT || (await fs.stat(path.join(parent,'Cloud Computing')).catch(()=>null)?parent:path.join(parent,'Awesome-BUPT-International-School-Notes'));
-const out=path.join(root,'dist');
+await fs.rm(path.join(root,'dist'),{recursive:true,force:true});
+const out=path.join(root,'dist/client');
 await fs.mkdir(out,{recursive:true});
 for(const d of ['data','media','vendor']) await fs.mkdir(path.join(out,d),{recursive:true});
 const chapterLabels=JSON.parse(await fs.readFile(path.join(root,'content/chapter-labels-en.json'),'utf8'));
@@ -106,7 +107,7 @@ for(const [name,short,category,description] of metadata){
  index.push({...course,chapters:chapters.length,questions:quiz.length});
 }
 await fs.writeFile(path.join(out,'data/index.json'),JSON.stringify(index));
-for(const f of ['index.html','app.js','styles.css','font.css'])await fs.copyFile(path.join(root,'src',f),path.join(out,f));
+for(const f of ['index.html','app.js','forum.js','styles.css','font.css'])await fs.copyFile(path.join(root,'src',f),path.join(out,f));
 await fs.cp(path.join(root,'src/assets'),path.join(out,'assets'),{recursive:true});
 // Ship only the browser runtime, styles and fonts, keeping production output small.
 await fs.rm(path.join(out,'vendor'),{recursive:true,force:true});
@@ -119,3 +120,9 @@ await fs.cp(path.join(root,'node_modules/mermaid/dist/chunks/mermaid.esm.min'),p
 await fs.writeFile(path.join(out,'_headers'),'/*\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n');
 if(formulaErrors.length){console.error(formulaErrors.slice(0,20));throw Error(`${formulaErrors.length} invalid formulas`)}
 console.log(JSON.stringify({courses:index.length,chapters:index.reduce((a,c)=>a+c.chapters,0),questions:questions.length,formulas:mathCount,images:mediaMap.size}));
+
+await fs.mkdir(path.join(root,'dist/server'),{recursive:true});
+for(const f of ['index.js','db.js'])await fs.copyFile(path.join(root,'server',f),path.join(root,'dist/server',f));
+await fs.writeFile(path.join(root,'dist/server/courses.js'),'export const courseIds = '+JSON.stringify(index.map(c=>c.id))+';\n');
+
+const localConfig=JSON.parse(await fs.readFile(path.join(root,'wrangler.json'),'utf8'));localConfig.main='index.js';localConfig.assets.directory='../client';localConfig.d1_databases[0].migrations_dir='../../drizzle';await fs.writeFile(path.join(root,'dist/server/wrangler.json'),JSON.stringify(localConfig,null,2));

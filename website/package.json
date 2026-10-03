@@ -5,11 +5,18 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "dev": "python3 -m http.server 4173 --directory dist --bind 127.0.0.1"
+    "dev": "node scripts/dev.mjs",
+    "db:generate": "drizzle-kit generate",
+    "test:forum": "node --test tests/forum.test.mjs"
   },
   "dependencies": {
     "katex": "0.16.22",
     "marked": "16.3.0",
     "mermaid": "11.17.2"
+  },
+  "devDependencies": {
+    "drizzle-kit": "0.31.10",
+    "drizzle-orm": "0.45.2",
+    "wrangler": "4.92.0"
   }
 }

@@ -33,7 +33,10 @@
 | :--- | :--- |
 | **站内阅读** | 按课程与章节浏览笔记，直接查看公式、表格、插图与 Mermaid 图示。 |
 | **自测练习** | 答案默认隐藏，先独立作答，再逐题展开核对；支持按章节练习、自评、待复习筛选与打乱顺序。 |
+| **Student forum** | 无需注册，按课程公开提问、求笔记、分享链接和回复；讨论保存在共享数据库，所有访客都可阅读。 |
 | **本地复习进度** | 阅读进度、作答草稿和掌握情况保存在当前浏览器，无需注册登录。 |
+
+[进入 Student forum](https://bupt-study-notes.htcafasfadf.chatgpt.site/#/forum) · 点击 **Add discussion topic** 发帖，昵称可选。
 
 网站源码与本地运行说明见 [`website`](website/README.md)。
 
