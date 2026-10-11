@@ -14,7 +14,8 @@
   <a href="https://bupt-study-notes.htcafasfadf.chatgpt.site"><strong>在线学习</strong></a> ·
   <a href="#课程目录">课程目录</a> ·
   <a href="#学课程的原则">学习原则</a> ·
-  <a href="#参与完善">参与完善</a>
+  <a href="#参与完善">参与完善</a> ·
+  <a href="#star-history">Star History</a>
 </p>
 
 ---
@@ -27,7 +28,11 @@
 
 配套的 **BUPT Study** 学习网站收录 **17 门课程、199 个章节与 1,903 道自测题**，课程采用每行一门的列表布局，可直接进入笔记与自测，并显示阅读进度。导航、课程卡片、章节选择与操作按钮统一使用英文，笔记正文和测试内容保留原语言。采用国际学院官网的透明标识，支持站内阅读与复习。题目来自笔记中的独立问答、加粗考点和例题，附对应参考答案；重复知识点合并整理。
 
-[![BUPT Study 学习网站界面](assets/readme/website.png)](https://bupt-study-notes.htcafasfadf.chatgpt.site)
+<p align="center">
+  <a href="https://bupt-study-notes.htcafasfadf.chatgpt.site">
+    <img src="assets/readme/website.jpg" alt="BUPT Study 当前网站界面：透明校徽、课程列表与学习和自测入口" width="429">
+  </a>
+</p>
 
 | 模式 | 使用方式 |
 | :--- | :--- |
@@ -84,3 +89,15 @@
 
 - **反馈问题**：提交 [Issue](https://github.com/Tianchenggg/Awesome-BUPT-International-School-Notes/issues/new)，注明课程、章节和具体内容。
 - **直接修改**：编辑对应课程的 Markdown 文件，并提交 [Pull Request](https://github.com/Tianchenggg/Awesome-BUPT-International-School-Notes/pulls)。新增配图请放入该课程的 `assets` 文件夹，并使用相对路径引用。
+
+## Star History
+
+感谢每一位收藏与支持这个项目的同学！下图展示仓库 Star 数量随时间的变化，点击可查看交互图表。
+
+<a href="https://www.star-history.com/?repos=Tianchenggg%2FAwesome-BUPT-International-School-Notes&amp;type=date&amp;legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=Tianchenggg/Awesome-BUPT-International-School-Notes&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=Tianchenggg/Awesome-BUPT-International-School-Notes&amp;type=date&amp;legend=top-left" />
+    <img alt="Star history of Awesome BUPT International School Notes" src="https://api.star-history.com/chart?repos=Tianchenggg/Awesome-BUPT-International-School-Notes&amp;type=date&amp;legend=top-left" width="800" />
+  </picture>
+</a>
