@@ -107,7 +107,7 @@ for(const [name,short,category,description] of metadata){
  index.push({...course,chapters:chapters.length,questions:quiz.length});
 }
 await fs.writeFile(path.join(out,'data/index.json'),JSON.stringify(index));
-for(const f of ['index.html','app.js','forum.js','styles.css','font.css'])await fs.copyFile(path.join(root,'src',f),path.join(out,f));
+for(const f of ['index.html','app.js','forum.js','math-layout.js','styles.css','font.css'])await fs.copyFile(path.join(root,'src',f),path.join(out,f));
 await fs.cp(path.join(root,'src/assets'),path.join(out,'assets'),{recursive:true});
 // Ship only the browser runtime, styles and fonts, keeping production output small.
 await fs.rm(path.join(out,'vendor'),{recursive:true,force:true});
