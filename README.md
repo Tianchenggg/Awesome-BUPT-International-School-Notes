@@ -30,7 +30,7 @@
 
 <p align="center">
   <a href="https://bupt-study-notes.htcafasfadf.chatgpt.site">
-    <img src="assets/readme/website.jpg" alt="BUPT Study 当前网站界面：透明校徽、课程列表与学习和自测入口" width="429">
+    <img src="assets/readme/website-desktop.jpg" alt="BUPT Study 桌面版网站界面：透明校徽、课程列表与学习和自测入口" width="1200">
   </a>
 </p>
 
